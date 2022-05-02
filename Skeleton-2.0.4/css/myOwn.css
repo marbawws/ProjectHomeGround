@@ -1,0 +1,73 @@
+html{
+    width: 100%;
+    height: 100%;
+    /*background-color: #e4e4e4;*/
+    background-color: #e50113;
+    background-image: url('../images/red.webp');
+    background-size:contain!important;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+div.notransparentYutub:hover{
+    background-color:rgba(40, 40, 40, 1) !important;
+}
+img.notransparentYutub:hover{
+    opacity: 1 !important;
+}
+div.notransparentV:hover{
+    background-color:rgba(214,218,240, 1)!important;
+}
+h1.notransparentV:hover{
+    opacity: 1 !important;
+}
+div.notransparentTwet:hover{
+    background-color:rgba(255, 255, 255, 1)!important;
+}
+img.notransparentTwet:hover{
+    opacity: 1 !important;
+}
+div.notransparentTwitch:hover{
+    background-color:rgba(255, 255, 255, 1)!important;
+}
+img.notransparentTwitch:hover{
+    opacity: 1 !important;
+}
+div.gmail:hover {
+    background-color: rgba(60, 60, 60, 1) !important;
+    border-radius: 10px
+}
+div.gmail:hover > p{
+    white-space: break-spaces;
+}
+p.gmail:hover {
+    white-space: break-spaces;overflow: visible;
+}
+div.gmail{
+    float: left;border: 1px solid white;background-color:rgba(60, 60, 60, 0.35); border-radius: 25px; overflow: hidden; width:100%;
+}
+p.gmail{
+    float: left;color:white;margin: 0; padding: 0;white-space: nowrap;text-overflow: ellipsis;max-width: 47ch; overflow: hidden
+}
+.tabcontent {
+    display: none;
+}
+/*.emails:hover {*/
+/*  background-color:rgba(40, 40, 40, 0.60) !important;*/
+/*}*/
+/*.emails {*/
+/*  overflow: visible;*/
+/*}*/
+.tabcontentEmail {
+    display: none;
+}
+.emailContainers {
+    position: absolute;
+    background-color: rgba(60, 60, 60, 0.70);
+    color:white;
+}
+
+.emailContainerheaders {
+    background-color: rgba(60, 60, 60, 0.70);
+    color:white;
+}

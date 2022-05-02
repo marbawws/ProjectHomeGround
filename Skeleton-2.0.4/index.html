@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Homium</title>
+
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<!--  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">-->
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/myOwn.css">
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/back3.jpg">
+  <style>
+
+  </style>
+
+</head>
+<body>
+<!-- Draggable DIV -->
+<!--<div id="mydiv" class="container">-->
+<!--  &lt;!&ndash; Include a header DIV with the same name as the draggable DIV, followed by "header" &ndash;&gt;-->
+<!--  <div id="mydivheader" class="container">Click here to move</div>-->
+<!--  <p>Move</p>-->
+<!--  <p>this</p>-->
+<!--  <p>DIV</p>-->
+<!--</div>-->
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <!-- Quick Access -->
+<div class="container" style="position:absolute; left:20px; top:20px; background-color:rgba(60, 60, 60, 0.35);">
+  <div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'tab1')">The big three</button>
+    <button class="tablinks" onclick="openTab(event, 'tab2')">Secondhand</button>
+    <button class="tablinks" onclick="openTab(event, 'tab3')">Misc.</button>
+  </div>
+  <div id="tab1" class="tabcontent" style="display: block;">
+    <div>
+      <div class="notransparentYutub container" style="float: left; width: 64px; padding-top: 5px;padding: 0px;height: 64px;background-color:rgba(40, 40, 40, 0.7);border-radius: 15px;">
+        <a href="https://youtube.com"> <img src="images/youtube.svg" class="notransparentYutub" style="opacity: 0.7;"></a>
+      </div>
+      <a href="https://boards.4channel.org/v"><div class="notransparentV container" style="float: left; width: 64px; height: 64px;padding: 0px; margin-left: 5px;background-color:rgba(214,218,240, 0.7);border-radius: 15px;">
+        <h1 class="notransparentV" style="text-align: center;
+            vertical-align: middle;line-height: 64px;color: #af0a1a; font-size: 35px; opacity: 0.7;">/v/</h1>
+<!--        <img src="images/v.png">-->
+      </div></a>
+      <div class="notransparentTwet container" style="float: left; width: 64px; height: 64px;padding: 0px; margin-left: 5px;background-color:rgba(29, 161, 242, 0.7);border-radius: 15px;">
+        <a href="https://twitter.com"><img class="notransparentTwet" src="images/twitter.svg" style="opacity: 0.7;"></a>
+      </div>
+      <div class="notransparentTwitch container" style="float: left; width: 64px; height: 64px;padding: 0px; margin-left: 5px;background-color:rgba(255, 255, 255, 0.7);border-radius: 15px;">
+        <a href="https://twitch.tv"><img class="notransparentTwet" src="images/twitch.svg" style="opacity: 0.7;"></a>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab2" class="tabcontent" style="">
+
+  </div>
+
+  <div id="tab3" class="tabcontent" style="">
+
+  </div>
+</div>
+  <div class="emails container" style="position:absolute; right:20px; top:20px; background-color:rgba(60, 60, 60, 0.35);">
+    <div class="tab">
+      <button class="tablinksEmail" onclick="openTabEmail(event, 'tab4', 'gmail')">Professional</button>
+      <button class="tablinksEmail" onclick="openTabEmail(event, 'tab5', 'outlookSchool')">School</button>
+      <button class="tablinksEmail" onclick="openTabEmail(event, 'tab6', 'outlookPerso')">Personal</button>
+    </div>
+    <div id="tab4" class="tabcontentEmail" >
+      <div>
+        <button id="authorize_button" style="float:left;display: none;">Authorize</button>
+        <button id="signout_button" style="float:left;display: none;">Sign Out</button>
+        <button class="refresh" style="float:right;display: block;" onclick="refreshGmail(event)">Refresh</button>
+      </div>
+      <div id="gmails" id="container" style="display: block;width:  415px;height: 360px; background-color:rgba(60, 60, 60, 0) !important; overflow: visible;"></div> <!--      gmails display block -->
+    </div>
+
+    <div id="tab5" class="tabcontentEmail" style="">
+
+    </div>
+
+    <div id="tab6" class="tabcontentEmail" style="">
+
+    </div>
+  </div>
+  
+  <script type="text/javascript" src="../scripts/draggableDiv.js"></script>
+  <script type="text/javascript" src="../scripts/config.js"></script>
+  <script async defer src="https://apis.google.com/js/api.js"></script>
+  <script type="text/javascript" src="../scripts/gmailFetch.js"></script>
+  <script type="text/javascript" src="../scripts/tabs.js"></script>
+  <script type="text/javascript" src="../scripts/EmailsSpecificFunctions.js"></script>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
