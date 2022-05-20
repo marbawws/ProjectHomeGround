@@ -4,7 +4,7 @@ html{
     /*background-color: #e4e4e4;*/
     background-color: #e50113;
     background-image: url('../images/red.webp');
-    background-size:contain!important;
+    /*background-size:contain!important;*/
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -63,6 +63,9 @@ p.gmail{
 }
 .emailContainers {
     position: absolute;
+    width: 400px;
+    height: 100%;
+    right: 50px;
     background-color: rgba(60, 60, 60, 0.70);
     color:white;
 }

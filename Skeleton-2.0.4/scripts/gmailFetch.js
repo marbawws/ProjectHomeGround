@@ -10,7 +10,6 @@ var SCOPES = 'https://www.googleapis.com/auth/gmail.readonly';
 var authorizeButton = document.getElementById('authorize_button');
 var signoutButton = document.getElementById('signout_button');
 
-
 /**
  *  On load, called to load the auth2 library and API client library.
  */
@@ -76,8 +75,8 @@ function handleSignoutClick(event) {
  *
  * @param {string} message Text to be placed in pre element.
  */
-function appendDiv(subject, from, date) { //laugh at the date not being used, haha what a nerd
-    $("<div class='gmail container' onclick='generateEmailWindow(`"+from+"`,`"+ subject+"`,`"+subject +"`)'>"
+function appendDiv(subject, from, date, data) { //laugh at the date not being used, haha what a nerd
+    $("<div class='gmail container' onclick='generateEmailWindow(`"+Base64.encode(from)+"`,`"+ Base64.encode(subject)+"`,`"+date +"`,`"+ data +"`)'>"
         + "<p class='gmail'><a href='https://mail.google.com/mail/u/0/#inbox'><img class='notransparentTwet' src='images/gmail.svg' style='float: left;width: 22px; height: 22px' ></a>"
         + "<b>&nbsp;" + from + "</b>"
         + "&nbsp;&nbsp;" + subject + "&nbsp;"+"</p></div>").appendTo("#gmails")
@@ -93,20 +92,61 @@ async function getMessages() {
     response = await fetchMessagesMetadata(10);
     var messages = response.result.messages;
     i = 0;
-    messages.forEach(async message => {
-        response = await fetchMessageDetails(message.id)
-        headers = response.result.payload.headers
-        matriceMessages[i] = populateMessage(headers);
+    for (const message of messages) {
+        response = await fetchMessageDetails(message.id);
+        headers = response.result.payload.headers;
+        // console.log(response.result.payload);
+        // html = getHtmlContent(response.result.payload)
+        // console.log(html)
+        matriceMessages[i] = populateMessage(headers, response.result.payload);
         i++;
-        if (matriceMessages.length == 10) { // async bullshit, callback garbage
+        if (matriceMessages.length === 10) { // async bullshit, callback garbage
             console.log(matriceMessages);
             matriceMessages = orderMessages(matriceMessages); //ordered by date
             matriceMessages.forEach(message => {
                 displayMessages(message);
             });
         }
-    })
+    }
 }
+function getHtmlEncodedContent(payload) { //content of messages are encrypted and separated in parts.. sometimes
+    console.log(payload)
+    var html ;
+    var htmled = false
+    if (payload.body.size > 0) {
+        html = payload.body.data;
+    } else {
+        for (let i = 0; i < (payload.parts).length && !htmled; i++) {
+            switch(payload.parts[i].mimeType){
+                case "text/html":
+                    html = payload.parts[i].body.data;
+                    htmled = true; //prefer html, if it finds html keep it
+                    break;
+                case "text/plain":
+                    html = payload.parts[i].body.data;
+                    break;
+                case "multipart/alternative": //this shit is absurd, strap in, onlooker
+                    return getHtmlEncodedContent(payload.parts[i]);
+            }
+        }
+    }
+    return html
+}
+function decodeContent(data){
+    // return atob(data.replace(/-/g, '+').replace(/_/g, '/'))
+    return Base64.decode(data.replace(/-/g, '+').replace(/_/g, '/'));
+    // return decodeBase64(data)
+}
+// function decodeBase64(base64) {
+//     const text = atob(base64);
+//     const length = text.length;
+//     const bytes = new Uint8Array(length);
+//     for (let i = 0; i < length; i++) {
+//         bytes[i] = text.charCodeAt(i);
+//     }
+//     const decoder = new TextDecoder(); // default is utf-8
+//     return decoder.decode(bytes);
+// }
 async function fetchMessagesMetadata(nb) {
     return (gapi.client.gmail.users.messages.list({
         'userId': 'me',
@@ -120,19 +160,21 @@ async function fetchMessageDetails(messageID) {
         'id': messageID
     }))
 }
-function populateMessage(headers) {
+function populateMessage(headers, payload) {
     var messageInfo = [];
+    //console.log(headers);
     headers.forEach(header => {
-        if (header.name == "Subject") {
+        if (header.name === "Subject") {
             messageInfo[0] = header.value;
         }
-        if (header.name == "From") {
+        if (header.name === "From") {
             messageInfo[1] = header.value;
         }
-        if (header.name == "Date") {
+        if (header.name === "Date") {
             messageInfo[2] = header.value;
         }
     })
+    messageInfo[3] = getHtmlEncodedContent(payload);
     return messageInfo;
 }
 
@@ -148,7 +190,7 @@ function orderMessages(matriceMessages) {
 function displayMessages(message) {
     message[1] = (message[1].split('<'))[0] // keep only name
     // message[0] = message[0].substring(0, 42) + "...";
-    appendDiv(message[0], message[1], message[2]);
+    appendDiv(message[0], message[1], message[2], message[3]);
 }
 
 function erasePreviousGmails(){
