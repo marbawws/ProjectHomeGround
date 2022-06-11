@@ -1,6 +1,6 @@
 var gmailFetched = false;
-    var outlookSchoolFetched = false;
-    var outlookPersonalFetched = false;
+var outlookSchoolFetched = false;
+var outlookPersonalFetched = false;
 
     function openTab(evt, tabName) {
       var i, tabcontent, tablinks;
@@ -27,12 +27,24 @@ var gmailFetched = false;
       }
       document.getElementById(tabName).style.display = "block";
       evt.currentTarget.className += " active";
-      if(type == 'gmail' && !gmailFetched){
-        handleClientLoad(); //fetch gmail mails
-        gmailFetched = true;
+      switch (type) {
+          case 'gmail':
+              if(!gmailFetched){
+                  handleClientLoad(); //initate client and fetch gmail mails
+                  gmailFetched = true;
+              }
+              break;
+          case 'outlookSchool':
+              if(!outlookSchoolFetched){
+                  initOClient(SCHOOL_USERNAME); //initate client and fetch outlook school mails
+                  outlookSchoolFetched = true;
+              }
+              break;
+          case 'outlookPerso':
+              if(!outlookPersonalFetched){
+                  initOClient(PERSONAL_USERNAME); //initate client and fetch outlook perso mails
+                  outlookPersonalFetched = true;
+              }
+              break;
       }
-    }
-    function refreshGmail(event){
-      erasePreviousGmails();
-      handleClientLoad();
     }

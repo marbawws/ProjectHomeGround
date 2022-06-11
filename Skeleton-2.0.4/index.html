@@ -87,19 +87,31 @@
     </div>
 
     <div id="tab5" class="tabcontentEmail" style="">
-
+      <div>
+        <button id="authorize_button2" style="float:left;display: none;">Authorize</button>
+        <button id="signout_button2" style="float:left;display: none;">Sign Out</button>
+        <button class="refresh" style="float:right;display: block;" onclick="refreshGmail(event)">Refresh</button>
+      </div>
+      <div id="outlooks1" id="container2" style="display: block;width:  415px;height: 360px; background-color:rgba(60, 60, 60, 0) !important; overflow: visible;"></div> <!--      gmails display block -->
     </div>
 
     <div id="tab6" class="tabcontentEmail" style="">
-
+      <div>
+        <button id="authorize_button3" style="float:left;display: none;">Authorize</button>
+        <button id="signout_button3" style="float:left;display: none;">Sign Out</button>
+        <button class="refresh" style="float:right;display: block;" onclick="refreshGmail(event)">Refresh</button>
+      </div>
+      <div id="outlooks2" id="container3" style="display: block;width:  415px;height: 360px; background-color:rgba(60, 60, 60, 0) !important; overflow: visible;"></div> <!--      gmails display block -->
     </div>
   </div>
-
+  <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.24.0/js/msal-browser.min.js"></script>
   <script type="text/javascript" src="../scripts/js-base64-3.7.2/base64.js"></script>
   <script type="text/javascript" src="../scripts/draggableDiv.js"></script>
-  <script type="text/javascript" src="../scripts/config.js"></script>
+  <script type="text/javascript" src="../scripts/gmailConfig.js"></script>
+  <script type="text/javascript" src="../scripts/outlookConfig.js"></script>
   <script async defer src="https://apis.google.com/js/api.js"></script>
   <script type="text/javascript" src="../scripts/gmailFetch.js"></script>
+  <script type="text/javascript" src="../scripts/outlookFetch.js"></script>
   <script type="text/javascript" src="../scripts/tabs.js"></script>
   <script type="text/javascript" src="../scripts/EmailsSpecificFunctions.js"></script>
 

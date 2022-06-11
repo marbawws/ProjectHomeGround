@@ -14,25 +14,25 @@ var signoutButton = document.getElementById('signout_button');
  *  On load, called to load the auth2 library and API client library.
  */
 function handleClientLoad() {
-    gapi.load('client:auth2', initClient);
+    gapi.load('client:auth2', initGClient);
 }
 
 /**
  *  Initializes the API client library and sets up sign-in state
  *  listeners.
  */
-function initClient() {
+function initGClient() {
     gapi.client.init({
-        apiKey: API_KEY,
-        clientId: CLIENT_ID,
+        apiKey: GAPI_KEY,
+        clientId: GCLIENT_ID,
         discoveryDocs: DISCOVERY_DOCS,
         scope: SCOPES
     }).then(function () {
         // Listen for sign-in state changes.
-        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+        gapi.auth2.getAuthInstance().isSignedIn.listen(updateGSigninStatus);
 
         // Handle the initial sign-in state.
-        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+        updateGSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
         authorizeButton.onclick = handleAuthClick;
         signoutButton.onclick = handleSignoutClick;
     }, function (error) {
@@ -44,7 +44,7 @@ function initClient() {
  *  Called when the signed in status changes, to update the UI
  *  appropriately. After a sign-in, the API is called.
  */
-function updateSigninStatus(isSignedIn) {
+function updateGSigninStatus(isSignedIn) {
     if (isSignedIn) {
         authorizeButton.style.display = 'none';
         signoutButton.style.display = 'block';
@@ -137,16 +137,7 @@ function decodeContent(data){
     return Base64.decode(data.replace(/-/g, '+').replace(/_/g, '/'));
     // return decodeBase64(data)
 }
-// function decodeBase64(base64) {
-//     const text = atob(base64);
-//     const length = text.length;
-//     const bytes = new Uint8Array(length);
-//     for (let i = 0; i < length; i++) {
-//         bytes[i] = text.charCodeAt(i);
-//     }
-//     const decoder = new TextDecoder(); // default is utf-8
-//     return decoder.decode(bytes);
-// }
+
 async function fetchMessagesMetadata(nb) {
     return (gapi.client.gmail.users.messages.list({
         'userId': 'me',
@@ -196,4 +187,8 @@ function displayMessages(message) {
 function erasePreviousGmails(){
     $('div.' + "gmail").remove();
     console.log();
+}
+function refreshGmail(event){
+    erasePreviousGmails();
+    getMessages();
 }
