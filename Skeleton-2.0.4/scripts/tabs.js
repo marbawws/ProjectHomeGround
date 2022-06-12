@@ -30,20 +30,20 @@ var outlookPersonalFetched = false;
       switch (type) {
           case 'gmail':
               if(!gmailFetched){
-                  handleClientLoad(); //initate client and fetch gmail mails
                   gmailFetched = true;
+                  handleClientLoad(); //initate client and fetch gmail mails
               }
               break;
           case 'outlookSchool':
               if(!outlookSchoolFetched){
-                  initOClient(SCHOOL_USERNAME); //initate client and fetch outlook school mails
                   outlookSchoolFetched = true;
+                  initOClient(SCHOOL_USERNAME); //initate client and fetch outlook school mails
               }
               break;
           case 'outlookPerso':
               if(!outlookPersonalFetched){
-                  initOClient(PERSONAL_USERNAME); //initate client and fetch outlook perso mails
                   outlookPersonalFetched = true;
+                  initOClient(PERSONAL_USERNAME); //initate client and fetch outlook perso mails
               }
               break;
       }

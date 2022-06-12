@@ -21,13 +21,14 @@ function handleClientLoad() {
  *  Initializes the API client library and sets up sign-in state
  *  listeners.
  */
-function initGClient() {
-    gapi.client.init({
+async function initGClient() {
+    await gapi.client.init({
         apiKey: GAPI_KEY,
         clientId: GCLIENT_ID,
         discoveryDocs: DISCOVERY_DOCS,
         scope: SCOPES
-    }).then(function () {
+    })
+        .then(function () {
         // Listen for sign-in state changes.
         gapi.auth2.getAuthInstance().isSignedIn.listen(updateGSigninStatus);
 
@@ -39,6 +40,35 @@ function initGClient() {
         appendPre(JSON.stringify(error, null, 2));
     });
 }
+
+// function gisLoaded() {
+//     tokenClient = google.accounts.oauth2.initTokenClient({
+//         client_id: GCLIENT_ID,
+//         scope: SCOPES,
+//         prompt: '',
+//         callback: async (response) => {
+//             if (response.error !== undefined) {
+//                 throw (response);
+//             }
+//             document.cookie = "access_tokenME=" + response.access_token;
+//             console.log(response);
+//             authorizeButton.style.display = 'none';
+//             signoutButton.style.display = 'block';
+//             await getMessages();
+//             // console.log(tokenClient);
+//         },
+//     });
+//     gisInited = true;
+//     // gapi.client.setToken();
+// }
+
+// function maybeEnableButtons() {
+//     if (gapiInited && gisInited) {
+//         handleAuthClick(); // ;)
+//         authorizeButton.style.display = 'block';
+//         signoutButton.style.display = 'none';
+//     }
+// }
 
 /**
  *  Called when the signed in status changes, to update the UI
@@ -77,7 +107,7 @@ function handleSignoutClick(event) {
  */
 function appendDiv(subject, from, date, data) { //laugh at the date not being used, haha what a nerd
     $("<div class='gmail container' onclick='generateEmailWindow(`"+Base64.encode(from)+"`,`"+ Base64.encode(subject)+"`,`"+date +"`,`"+ data +"`)'>"
-        + "<p class='gmail'><a href='https://mail.google.com/mail/u/0/#inbox'><img class='notransparentTwet' src='images/gmail.svg' style='float: left;width: 22px; height: 22px' ></a>"
+        + "<p class='gmail'><a href='https://mail.google.com/mail/u/0/#inbox'><img class='notransparentTwet noPropagation' src='images/gmail.svg' style='float: left;width: 22px; height: 22px' ></a>"
         + "<b>&nbsp;" + from + "</b>"
         + "&nbsp;&nbsp;" + subject + "&nbsp;"+"</p></div>").appendTo("#gmails")
     // $("<p>"+ message + "</p>").appendTo("#gmails")
@@ -90,7 +120,9 @@ function appendDiv(subject, from, date, data) { //laugh at the date not being us
 async function getMessages() {
     var matriceMessages = [];
     response = await fetchMessagesMetadata(10);
+    console.log(response);
     var messages = response.result.messages;
+    console.log(messages);
     i = 0;
     for (const message of messages) {
         response = await fetchMessageDetails(message.id);
@@ -108,6 +140,10 @@ async function getMessages() {
             });
         }
     }
+    $(".noPropagation").on("click", function(event){
+        event.stopPropagation();
+        console.log( "I was clicked, but my parent will not be." );
+    });// yo :^)
 }
 function getHtmlEncodedContent(payload) { //content of messages are encrypted and separated in parts.. sometimes
     console.log(payload)
@@ -126,6 +162,9 @@ function getHtmlEncodedContent(payload) { //content of messages are encrypted an
                     html = payload.parts[i].body.data;
                     break;
                 case "multipart/alternative": //this shit is absurd, strap in, onlooker
+                    return getHtmlEncodedContent(payload.parts[i]);
+
+                case "multipart/related": //I found.. yet.. another
                     return getHtmlEncodedContent(payload.parts[i]);
             }
         }
@@ -184,11 +223,7 @@ function displayMessages(message) {
     appendDiv(message[0], message[1], message[2], message[3]);
 }
 
-function erasePreviousGmails(){
-    $('div.' + "gmail").remove();
-    console.log();
-}
 function refreshGmail(event){
-    erasePreviousGmails();
+    eraseDivs("gmail");
     getMessages();
 }
