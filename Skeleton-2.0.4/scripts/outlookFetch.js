@@ -63,12 +63,31 @@ function fetchMessagesOutlook(accessToken){
             return data;
     });
 }
+function outlookRead(messageId, accessToken){
+    var headers = new Headers();
+    var bearer = "Bearer " + accessToken;
+    headers.append("Authorization", bearer);
+    headers.append("Content-type", "application/json");
+    json = {"isRead": true};
+    var options = {
+        method: "PATCH",
+        headers: headers,
+        body: JSON.stringify(json)
+    };
+    console.log(options);
+    var graphEndpoint = "https://graph.microsoft.com/v1.0/me/messages/" + messageId;
 
-function appendDivOutlook(subject, from, date, data, username, isRead) {
+    return fetch(graphEndpoint, options) //don't question this block, async was a mistake
+        .then(function (response) {
+            return response.json();
+        }).then(function (data){
+            return data;
+        });
+}
+
+function appendDivOutlook(subject, from, date, data, username, isRead, id, token) {
     var destination;
     var divName;
-    var styleText = "";
-    var styleImg = "";
 
     if(username === PERSONAL_USERNAME){ // very scuffed, but hey does it work? yes, then it just works ;)
         destination = "#outlooks2";
@@ -77,23 +96,37 @@ function appendDivOutlook(subject, from, date, data, username, isRead) {
         destination = "#outlooks1";
         divName = "outlook1"
     }
-    if(isRead){
-        styleText = "color:rgba(255, 255, 255, 0.80)";
-        styleImg = "opacity: 0.50";
-    }
-    $("<div class='" + divName + " container" + "' onclick='generateEmailWindow(`"+Base64.encode(from)+"`,`"+ Base64.encode(subject)+"`,`"+date +"`,`"+ Base64.encode(data) +"`)'>"
-        + "<p style='"+styleText+"' class="+divName+"><a href='https://outlook.live.com/mail/0/'><img class='notransparentTwet noPropagation' src='images/microsoft-outlook.svg' style='"+styleImg+"; float: left;width: 22px; height: 22px' ></a>"
+    $("<div id="+removeSpecialCharacters(id)+" class='" + divName + " container" + "' onclick='generateEmailWindow(`"+Base64.encode(from)+"`,`"+ Base64.encode(subject)+"`,`"+date +"`,`"+ Base64.encode(data) +"`,`"+ Base64.encode(id) +"`,`"+ Base64.encode(token) +"`)'>"
+        + "<p class="+divName+"><a href='https://outlook.live.com/mail/0/'><img class='notransparentTwet noPropagation' src='images/microsoft-outlook.svg' style='float: left;width: 22px; height: 22px' ></a>"
         + "<b>&nbsp;" + from + "</b>"
         + "&nbsp;&nbsp;" + subject + "&nbsp;"+"</p></div>").appendTo(destination);
+    if(isRead){
+        changeReadEmailCSS(id);
+    }
 }
+
 
 async function getOutlooks(accessToken, username){ //very similar to getMessages in gmail, but msal is cool so im approaching things a bit differently
     var response = await fetchMessagesOutlook(accessToken);//straight up contains every message, how can gapi compete?
     var messages = response.value;
-    console.log(messages);
     for(const message of messages){
-        appendDivOutlook(message.subject, message.sender.emailAddress.name ,
-            message.receivedDateTime, message.body.content, username, message.isRead); //no way its that easy right? oh no
+        console.log(message);
+        var sender;
+        if(account.username === SCHOOL_USERNAME){
+            const regex = /(?<=From: )(.*)(?= <)/;
+            sender = (regex).exec(message.bodyPreview);
+            if(sender === null){ //if message doesnt come from the school account but from the proxy account
+                sender = message.sender.emailAddress.name;
+            } else {
+               sender = sender[0];
+            }
+            console.log(sender);
+        } else {
+            sender = message.sender.emailAddress.name;
+        }
+        appendDivOutlook(message.subject, sender ,
+            message.receivedDateTime, message.body.content,
+            username, message.isRead, message.id, accessToken); //token here and not global because account often changes
     }
     $(".noPropagation").on("click", function(event){
         event.stopPropagation();
@@ -149,7 +182,7 @@ function callAPI(username){
 function loginUser(){
     const loginRequest = {
         scopes: ["User.ReadWrite"],
-        prompt: ''
+        prompt: 'select_account'
     }
     myMsal.loginPopup(loginRequest)
         .then(function (loginResponse) {
@@ -171,6 +204,13 @@ function LogoutUser(){
         .then( function (logoutResponse){
             authButton.style.display = 'block';
             signOutButton.style.display = 'none';
+            console.log(account);
+            if(account.username === PERSONAL_USERNAME) {
+                eraseDivs("outlook2");
+            }else{
+                eraseDivs("outlook1");
+            }
+            account = {};
     });
 }
 

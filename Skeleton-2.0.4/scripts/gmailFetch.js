@@ -5,7 +5,7 @@ var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/res
 
 // Authorization scopes required by the API; multiple scopes can be
 // included, separated by spaces.
-var SCOPES = 'https://www.googleapis.com/auth/gmail.readonly';
+var SCOPES = 'https://mail.google.com/';
 
 var authorizeButton = document.getElementById('authorize_button');
 var signoutButton = document.getElementById('signout_button');
@@ -41,35 +41,6 @@ async function initGClient() {
     });
 }
 
-// function gisLoaded() {
-//     tokenClient = google.accounts.oauth2.initTokenClient({
-//         client_id: GCLIENT_ID,
-//         scope: SCOPES,
-//         prompt: '',
-//         callback: async (response) => {
-//             if (response.error !== undefined) {
-//                 throw (response);
-//             }
-//             document.cookie = "access_tokenME=" + response.access_token;
-//             console.log(response);
-//             authorizeButton.style.display = 'none';
-//             signoutButton.style.display = 'block';
-//             await getMessages();
-//             // console.log(tokenClient);
-//         },
-//     });
-//     gisInited = true;
-//     // gapi.client.setToken();
-// }
-
-// function maybeEnableButtons() {
-//     if (gapiInited && gisInited) {
-//         handleAuthClick(); // ;)
-//         authorizeButton.style.display = 'block';
-//         signoutButton.style.display = 'none';
-//     }
-// }
-
 /**
  *  Called when the signed in status changes, to update the UI
  *  appropriately. After a sign-in, the API is called.
@@ -97,6 +68,7 @@ function handleAuthClick(event) {
  */
 function handleSignoutClick(event) {
     gapi.auth2.getAuthInstance().signOut();
+    eraseDivs("gmail");//secure sign out :)
 }
 
 /**
@@ -105,12 +77,27 @@ function handleSignoutClick(event) {
  *
  * @param {string} message Text to be placed in pre element.
  */
-function appendDiv(subject, from, date, data) { //laugh at the date not being used, haha what a nerd
-    $("<div class='gmail container' onclick='generateEmailWindow(`"+Base64.encode(from)+"`,`"+ Base64.encode(subject)+"`,`"+date +"`,`"+ data +"`)'>"
-        + "<p class='gmail'><a href='https://mail.google.com/mail/u/0/#inbox'><img class='notransparentTwet noPropagation' src='images/gmail.svg' style='float: left;width: 22px; height: 22px' ></a>"
-        + "<b>&nbsp;" + from + "</b>"
+function appendDiv(subject, from, date, data, read, id) { //laugh at the date not being used, haha what a nerd
+    console.log(id);
+    var styleText = "";
+    var styleImg = "";
+    var bold = "b" //sender will be bold if not read and italics if read
+    // if(read) {
+    //     styleText = "color:rgba(255, 255, 255, 0.80)";
+    //     styleImg = "opacity: 0.50";
+    //     bold = "i"
+    // }
+    $("<div id="+removeSpecialCharacters(id)+" class='gmail container' onclick='generateEmailWindow(`"+Base64.encode(from)+"`,`"+ Base64.encode(subject)+"`,`"+date +"`,`"+ data +"`,`"+Base64.encode(id)+"`,`"+ Base64.encode("") +"`)'>"
+        + "<p style='"+styleText+"'class='gmail'><a href='https://mail.google.com/mail/u/0/#inbox'><img class='notransparentTwet noPropagation' src='images/gmail.svg' style='"+styleImg+";float: left;width: 22px; height: 22px' ></a>"
+        + "<"+bold+">&nbsp;" + from + "</"+bold+">"
         + "&nbsp;&nbsp;" + subject + "&nbsp;"+"</p></div>").appendTo("#gmails")
-    // $("<p>"+ message + "</p>").appendTo("#gmails")
+    if(read){
+        changeReadEmailCSS(id);
+    }
+}
+
+function removeSpecialCharacters(stringToReplace){
+    return stringToReplace.replace(/[^\w\s]/gi, '')
 }
 
 /**
@@ -120,20 +107,20 @@ function appendDiv(subject, from, date, data) { //laugh at the date not being us
 async function getMessages() {
     var matriceMessages = [];
     response = await fetchMessagesMetadata(10);
-    console.log(response);
     var messages = response.result.messages;
-    console.log(messages);
     i = 0;
     for (const message of messages) {
+        var read = true;
         response = await fetchMessageDetails(message.id);
+        console.log(response);
         headers = response.result.payload.headers;
-        // console.log(response.result.payload);
-        // html = getHtmlContent(response.result.payload)
-        // console.log(html)
-        matriceMessages[i] = populateMessage(headers, response.result.payload);
+        if(response.result.labelIds[0] === "UNREAD"){// check if read
+            read = false;
+        }
+        matriceMessages[i] = populateMessage(headers, response.result.payload, read, message.id);
         i++;
         if (matriceMessages.length === 10) { // async bullshit, callback garbage
-            console.log(matriceMessages);
+            // console.log(matriceMessages);
             matriceMessages = orderMessages(matriceMessages); //ordered by date
             matriceMessages.forEach(message => {
                 displayMessages(message);
@@ -146,7 +133,6 @@ async function getMessages() {
     });// yo :^)
 }
 function getHtmlEncodedContent(payload) { //content of messages are encrypted and separated in parts.. sometimes
-    console.log(payload)
     var html ;
     var htmled = false
     if (payload.body.size > 0) {
@@ -171,28 +157,29 @@ function getHtmlEncodedContent(payload) { //content of messages are encrypted an
     }
     return html
 }
-function decodeContent(data){
-    // return atob(data.replace(/-/g, '+').replace(/_/g, '/'))
-    return Base64.decode(data.replace(/-/g, '+').replace(/_/g, '/'));
-    // return decodeBase64(data)
-}
 
 async function fetchMessagesMetadata(nb) {
     return (gapi.client.gmail.users.messages.list({
         'userId': 'me',
         'labelIds': 'INBOX',
         'maxResults': nb
-    }))
+    }));
+}
+async function removeUnReadLabel(messageId) {
+    return (gapi.client.gmail.users.messages.modify({
+        'userId': 'me',
+        'id': messageId,
+        'removeLabelIds': ['UNREAD']
+    }));
 }
 async function fetchMessageDetails(messageID) {
     return (gapi.client.gmail.users.messages.get({
         'userId': 'me',
         'id': messageID
-    }))
+    }));
 }
-function populateMessage(headers, payload) {
+function populateMessage(headers, payload, read, id) {
     var messageInfo = [];
-    //console.log(headers);
     headers.forEach(header => {
         if (header.name === "Subject") {
             messageInfo[0] = header.value;
@@ -203,8 +190,10 @@ function populateMessage(headers, payload) {
         if (header.name === "Date") {
             messageInfo[2] = header.value;
         }
-    })
+    });
     messageInfo[3] = getHtmlEncodedContent(payload);
+    messageInfo[4] = read;
+    messageInfo[5] = id;
     return messageInfo;
 }
 
@@ -220,7 +209,7 @@ function orderMessages(matriceMessages) {
 function displayMessages(message) {
     message[1] = (message[1].split('<'))[0] // keep only name
     // message[0] = message[0].substring(0, 42) + "...";
-    appendDiv(message[0], message[1], message[2], message[3]);
+    appendDiv(message[0], message[1], message[2], message[3], message[4], message[5]);
 }
 
 function refreshGmail(event){
