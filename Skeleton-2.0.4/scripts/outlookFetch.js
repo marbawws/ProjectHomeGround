@@ -10,15 +10,20 @@ function initOClient(username){
     const config = {
         auth: {
             clientId: OCLIENT_ID
+        },
+        cache: {
+            cacheLocation: "localStorage"
         }
     };
     myMsal = new msal.PublicClientApplication(config);
+    // myMsal.Storage("localStorage");
     handleButtons(username);
     figureOutTheAccount(username);
     // console.log(myMsal.getAllAccounts());
 }
 function figureOutTheAccount(username){
     accounts = myMsal.getAllAccounts();
+    console.log(accounts);
         for (let i = 0; i < accounts.length; i++) {
             if (accounts[i].username === username){
                 account = accounts[i];
@@ -96,15 +101,14 @@ function appendDivOutlook(subject, from, date, data, username, isRead, id, token
         destination = "#outlooks1";
         divName = "outlook1"
     }
-    $("<div id="+removeSpecialCharacters(id)+" class='" + divName + " container" + "' onclick='generateEmailWindow(`"+Base64.encode(from)+"`,`"+ Base64.encode(subject)+"`,`"+date +"`,`"+ Base64.encode(data) +"`,`"+ Base64.encode(id) +"`,`"+ Base64.encode(token) +"`)'>"
-        + "<p class="+divName+"><a href='https://outlook.live.com/mail/0/'><img class='notransparentTwet noPropagation' src='images/microsoft-outlook.svg' style='float: left;width: 22px; height: 22px' ></a>"
+    $("<div id="+removeSpecialCharacters(id)+" class='" + divName + " container" + "' onclick='generateEmailWindow(`"+Base64.encode(from)+"`,`"+ Base64.encode(subject)+"`,`"+date +"`,`"+ Base64.encode(data) +"`,`"+ Base64.encode(id) +"`,`"+ Base64.encode(token) +"`,`"+ isRead +"`)'>"
+        + "<p class="+divName+"><a href='https://outlook.live.com/mail/0/'><img class='notransparentTwet noPropagation' src='images/outlook.svg' style='float: left;width: 22px; height: 22px' ></a>"
         + "<b>&nbsp;" + from + "</b>"
         + "&nbsp;&nbsp;" + subject + "&nbsp;"+"</p></div>").appendTo(destination);
     if(isRead){
         changeReadEmailCSS(id);
     }
 }
-
 
 async function getOutlooks(accessToken, username){ //very similar to getMessages in gmail, but msal is cool so im approaching things a bit differently
     var response = await fetchMessagesOutlook(accessToken);//straight up contains every message, how can gapi compete?
@@ -113,8 +117,8 @@ async function getOutlooks(accessToken, username){ //very similar to getMessages
         console.log(message);
         var sender;
         if(account.username === SCHOOL_USERNAME){
-            const regex = /(?<=From: )(.*)(?= <)/;
-            sender = (regex).exec(message.bodyPreview);
+
+            sender = getTextBetweenTwoClauses(message.bodyPreview, "From: ", " <");
             if(sender === null){ //if message doesnt come from the school account but from the proxy account
                 sender = message.sender.emailAddress.name;
             } else {
@@ -182,7 +186,7 @@ function callAPI(username){
 function loginUser(){
     const loginRequest = {
         scopes: ["User.ReadWrite"],
-        prompt: 'select_account'
+        prompt: ''
     }
     myMsal.loginPopup(loginRequest)
         .then(function (loginResponse) {

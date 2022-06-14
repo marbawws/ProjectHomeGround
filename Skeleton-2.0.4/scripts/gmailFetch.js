@@ -87,7 +87,7 @@ function appendDiv(subject, from, date, data, read, id) { //laugh at the date no
     //     styleImg = "opacity: 0.50";
     //     bold = "i"
     // }
-    $("<div id="+removeSpecialCharacters(id)+" class='gmail container' onclick='generateEmailWindow(`"+Base64.encode(from)+"`,`"+ Base64.encode(subject)+"`,`"+date +"`,`"+ data +"`,`"+Base64.encode(id)+"`,`"+ Base64.encode("") +"`)'>"
+    $("<div id="+removeSpecialCharacters(id)+" class='gmail container' onclick='generateEmailWindow(`"+Base64.encode(from)+"`,`"+ Base64.encode(subject)+"`,`"+date +"`,`"+ data +"`,`"+Base64.encode(id)+"`,`"+ Base64.encode("") +"`,`"+ read +"`)'>"
         + "<p style='"+styleText+"'class='gmail'><a href='https://mail.google.com/mail/u/0/#inbox'><img class='notransparentTwet noPropagation' src='images/gmail.svg' style='"+styleImg+";float: left;width: 22px; height: 22px' ></a>"
         + "<"+bold+">&nbsp;" + from + "</"+bold+">"
         + "&nbsp;&nbsp;" + subject + "&nbsp;"+"</p></div>").appendTo("#gmails")
