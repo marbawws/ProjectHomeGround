@@ -114,7 +114,7 @@ async function getOutlooks(accessToken, username){ //very similar to getMessages
     var response = await fetchMessagesOutlook(accessToken);//straight up contains every message, how can gapi compete?
     var messages = response.value;
     for(const message of messages){
-        console.log(message);
+        // console.log(message);
         var sender;
         if(account.username === SCHOOL_USERNAME){
 
@@ -124,7 +124,6 @@ async function getOutlooks(accessToken, username){ //very similar to getMessages
             } else {
                sender = sender[0];
             }
-            console.log(sender);
         } else {
             sender = message.sender.emailAddress.name;
         }

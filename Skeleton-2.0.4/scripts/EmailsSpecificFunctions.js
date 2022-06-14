@@ -21,7 +21,6 @@ async function generateEmailWindow(from, subject, date, data, messageId, accessT
 }
 function eraseDivs(classname){
     $('div.' + classname).remove();
-    console.log();
 }
 
 function decodeContent(data){
@@ -29,22 +28,24 @@ function decodeContent(data){
 }
 
 function changeReadEmailCSS(id){
-    console.log(id);
     id = removeSpecialCharacters(id);
+    img = $("#" + id + " img");
     $("#" + id + " p").css("color","rgba(255, 255, 255, 0.80)");
-    $("#" + id + " img").css("-webkit-filter","invert(1)");
-    $("#" + id + " img").css("filter: ","invert(1)"); //laze encompasses my being and fruitifies the most elegant of alternatives
-    $("#" + id + " img").css("background-color","rgba(215, 215, 215, 0.15)"); //if u want it black, make it white. I swear my genius frightens me
+    img.css({
+        "-webkit-filter":"invert(1)",
+        "filter: ":"invert(1)", //laze encompasses my being and fruitifies the most elegant of alternatives
+        "background-color":"rgba(215, 215, 215, 0.15)", //if u want it black, make it white. I swear my genius frightens me
+
+    });
 
     $("#" + id + " b").replaceWith(function (){ //replace all bold text with italics
         return $("<i />", {html: $(this).html()});
     });
-    emailtype = getTextBetweenTwoClauses($("#" + id + " img").attr("src"), "images/", ".svg")
-    $("#" + id + " img").attr("src", "images/" + emailtype[0] + "Opened" + ".svg");
+    emailtype = getTextBetweenTwoClauses(img.attr("src"), "images/", ".svg")
+    img.attr("src", "images/" + emailtype[0] + "Opened" + ".svg");
 }
 
 function getTextBetweenTwoClauses(string, clause1, clause2){
     const regex = new RegExp("(?<="+ clause1+ ")(.*)(?="+clause2+ ")");
-    console.log(regex);
     return (regex).exec(string);
 }

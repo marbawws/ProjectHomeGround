@@ -5,7 +5,7 @@ var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/res
 
 // Authorization scopes required by the API; multiple scopes can be
 // included, separated by spaces.
-var SCOPES = 'https://mail.google.com/';
+var SCOPES = 'https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.labels';
 
 var authorizeButton = document.getElementById('authorize_button');
 var signoutButton = document.getElementById('signout_button');
@@ -78,21 +78,15 @@ function handleSignoutClick(event) {
  * @param {string} message Text to be placed in pre element.
  */
 function appendDiv(subject, from, date, data, read, id) { //laugh at the date not being used, haha what a nerd
-    console.log(id);
     var styleText = "";
     var styleImg = "";
-    var bold = "b" //sender will be bold if not read and italics if read
-    // if(read) {
-    //     styleText = "color:rgba(255, 255, 255, 0.80)";
-    //     styleImg = "opacity: 0.50";
-    //     bold = "i"
-    // }
+
     $("<div id="+removeSpecialCharacters(id)+" class='gmail container' onclick='generateEmailWindow(`"+Base64.encode(from)+"`,`"+ Base64.encode(subject)+"`,`"+date +"`,`"+ data +"`,`"+Base64.encode(id)+"`,`"+ Base64.encode("") +"`,`"+ read +"`)'>"
         + "<p style='"+styleText+"'class='gmail'><a href='https://mail.google.com/mail/u/0/#inbox'><img class='notransparentTwet noPropagation' src='images/gmail.svg' style='"+styleImg+";float: left;width: 22px; height: 22px' ></a>"
-        + "<"+bold+">&nbsp;" + from + "</"+bold+">"
+        + "<b>&nbsp;" + from + "</b>"
         + "&nbsp;&nbsp;" + subject + "&nbsp;"+"</p></div>").appendTo("#gmails")
     if(read){
-        changeReadEmailCSS(id);
+        changeReadEmailCSS(id); //does pretty cool shit, check it out yoyo
     }
 }
 
