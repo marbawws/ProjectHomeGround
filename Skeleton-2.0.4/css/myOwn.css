@@ -11,30 +11,69 @@ html{
 .noPropagation{
 
 }
-div.notransparentYutub:hover{
-    background-color:rgba(40, 40, 40, 1) !important;
+
+div.bookmark{
+    float: left; width: 64px; height: 64px;padding: 0px; margin: 2.5px;border-radius: 15px;
 }
-img.notransparentYutub:hover{
-    opacity: 1 !important;
+img.bookmark{
+    width: 100%; height: 100%;
 }
-div.notransparentV:hover{
-    background-color:rgba(214,218,240, 1)!important;
+/*img.bookmark:hover{*/
+/*    width: 72px; height: 64px;*/
+/*}*/
+.bookmark:hover{
+    /*width: 68px; height: 68px; overflow: visible;*/
+    cursor: pointer;
+    opacity: 0.2;
+    /*width: 72px; height: 72px;*/
 }
-h1.notransparentV:hover{
-    opacity: 1 !important;
+/*a.bookmark, a.bookmark:hover,  a.bookmark:focus, a.bookmark:active{*/
+/*    all: unset;*/
+/*    cursor: pointer;*/
+/*    opacity: 0.2;*/
+/*}*/
+
+input[type="text"].links{
+    display: block;
+    width:100%;
+    background :url(../images/edit.svg) no-repeat, url(../images/link.svg) no-repeat;
+    background-size: 25px 25px, 30px 30px;
+    background-position: 95% 44%, 2% 44%;
 }
-div.notransparentTwet:hover{
-    background-color:rgba(255, 255, 255, 1)!important;
+input[type="text"].identification{
+    display: block;
+    width:100%;
+    background :url(../images/edit.svg) no-repeat, url(../images/finger-print.svg) no-repeat;
+    background-size: 25px 25px, 30px 30px;
+    background-position: 95% 44%, 2% 44%;
 }
-img.notransparentTwet:hover{
-    opacity: 1 !important;
+
+#addBookmarkButton:hover, #addBookmarkButton2:hover, #addBookmarkButton3:hover{
+    content:url(../images/plusBlack.svg);
 }
-div.notransparentTwitch:hover{
-    background-color:rgba(255, 255, 255, 1)!important;
-}
-img.notransparentTwitch:hover{
-    opacity: 1 !important;
-}
+
+/*.bookmark{*/
+/*    max-width:100%;*/
+/*    max-height:100%;*/
+/*}*/
+/*div.notransparentV:hover{*/
+/*    background-color:rgba(214,218,240, 1)!important;*/
+/*}*/
+/*h1.notransparentV:hover{*/
+/*    opacity: 1 !important;*/
+/*}*/
+/*div.notransparentTwet:hover{*/
+/*    background-color:rgba(255, 255, 255, 1)!important;*/
+/*}*/
+/*img.notransparentTwet:hover{*/
+/*    opacity: 1 !important;*/
+/*}*/
+/*div.notransparentTwitch:hover{*/
+/*    background-color:rgba(255, 255, 255, 1)!important;*/
+/*}*/
+/*img.notransparentTwitch:hover{*/
+/*    opacity: 1 !important;*/
+/*}*/
 div.gmail:hover {
     background-color: rgba(60, 60, 60, 1) !important;
     border-radius: 10px

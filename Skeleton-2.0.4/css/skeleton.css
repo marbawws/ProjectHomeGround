@@ -93,7 +93,8 @@ a:hover {
 button,
 input[type="submit"],
 input[type="reset"],
-input[type="button"] {
+input[type="button"],
+input[type="text"]{
   display: inline-block;
   height: 38px;
   padding: 0 30px;
@@ -108,7 +109,7 @@ input[type="button"] {
   white-space: nowrap;
   background-color: transparent;
   border-radius: 25px;
-  border: 1px solid #bbb;
+  border: 1px solid white;
   cursor: pointer;
   box-sizing: border-box;
   color: white;}
@@ -117,11 +118,13 @@ button:hover,
 input[type="submit"]:hover,
 input[type="reset"]:hover,
 input[type="button"]:hover,
+input[type="text"]:hover,
 .button:focus,
 button:focus,
 input[type="submit"]:focus,
 input[type="reset"]:focus,
-input[type="button"]:focus {
+input[type="button"]:focus,
+input[type="text"]:focus{
   color: #333;
   border-color: #888;
   outline: 0; }
@@ -150,6 +153,38 @@ input[type="button"].button-primary:focus {
 
 /* Forms
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+input[type="text"].links:focus::placeholder,
+input[type="text"].identification:focus::placeholder{
+  text-align: center;
+  text-indent: 0px;
+  opacity: 0.5;
+}
+input[type="text"].links:focus,
+input[type="text"].links:hover
+{
+  background : url(../images/editBLACK.svg) no-repeat, url(../images/linkBLACK.svg) no-repeat;
+  background-position: 95% 44%,2% 44%;
+  background-size: 25px 25px,30px 30px; /*  css is truly the work of a maniac*/
+}
+input[type="text"].identification:focus,
+input[type="text"].identification:hover
+{
+  background : url(../images/editBLACK.svg) no-repeat, url(../images/finger-printBLACK.svg) no-repeat;
+  background-position: 95% 44%,2% 44%;
+  background-size: 25px 25px,30px 30px; /*  css is truly the work of a maniac*/
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 0.8; /* Firefox */
+  text-align: left;
+  text-indent: 0px;
+}
+:hover::placeholder{ /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: black;
+  opacity: 1;
+}
+
 input[type="email"],
 input[type="number"],
 input[type="search"],
@@ -159,13 +194,16 @@ input[type="url"],
 input[type="password"],
 textarea,
 select {
+  text-indent: 0px;
   height: 38px;
-  padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
-  background-color: #fff;
-  border: 1px solid #D1D1D1;
-  border-radius: 4px;
+  padding: 6px 45px; /* The 6px vertically centers text on FF, ignored by Webkit */
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 25px;
   box-shadow: none;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  text-align: left;
+  text-transform: none;}
 /* Removes awkward default styles on some inputs for iOS */
 input[type="email"],
 input[type="number"],
@@ -186,13 +224,19 @@ input[type="email"]:focus,
 input[type="number"]:focus,
 input[type="search"]:focus,
 input[type="text"]:focus,
+input[type="text"].links:focus,
+input[type="text"].identification:focus,
 input[type="tel"]:focus,
 input[type="url"]:focus,
 input[type="password"]:focus,
 textarea:focus,
 select:focus {
-  border: 1px solid #33C3F0;
-  outline: 0; }
+  border: 1px solid #3C3C3C;
+  background-color: white;
+  outline: 0;
+  font-weight: bold;
+  color : #3C3C3C;
+  }
 label,
 legend {
   display: block;

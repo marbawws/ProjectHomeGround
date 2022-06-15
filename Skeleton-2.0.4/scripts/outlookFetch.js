@@ -102,7 +102,7 @@ function appendDivOutlook(subject, from, date, data, username, isRead, id, token
         divName = "outlook1"
     }
     $("<div id="+removeSpecialCharacters(id)+" class='" + divName + " container" + "' onclick='generateEmailWindow(`"+Base64.encode(from)+"`,`"+ Base64.encode(subject)+"`,`"+date +"`,`"+ Base64.encode(data) +"`,`"+ Base64.encode(id) +"`,`"+ Base64.encode(token) +"`,`"+ isRead +"`)'>"
-        + "<p class="+divName+"><a href='https://outlook.live.com/mail/0/'><img class='notransparentTwet noPropagation' src='images/outlook.svg' style='float: left;width: 22px; height: 22px' ></a>"
+        + "<p class="+divName+"><a href='https://outlook.live.com/mail/0/'><img class='bookmark noPropagation' src='images/outlook.svg' style='float: left;width: 22px; height: 22px' ></a>"
         + "<b>&nbsp;" + from + "</b>"
         + "&nbsp;&nbsp;" + subject + "&nbsp;"+"</p></div>").appendTo(destination);
     if(isRead){
@@ -116,7 +116,7 @@ async function getOutlooks(accessToken, username){ //very similar to getMessages
     for(const message of messages){
         // console.log(message);
         var sender;
-        if(account.username === SCHOOL_USERNAME){
+        if(username === SCHOOL_USERNAME){
 
             sender = getTextBetweenTwoClauses(message.bodyPreview, "From: ", " <");
             if(sender === null){ //if message doesnt come from the school account but from the proxy account
@@ -162,7 +162,7 @@ function callAPI(username){
                         // Acquire token interactive success
                         let accessToken = accessTokenResponse.accessToken;
                         // Call your API with token
-                        getOutlooks(accessToken);
+                        getOutlooks(accessToken, username);
                     })
                     .catch(function (error) {
                         // Acquire token interactive failure

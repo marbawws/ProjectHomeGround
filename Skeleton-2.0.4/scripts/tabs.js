@@ -14,6 +14,7 @@ var outlookPersonalFetched = false;
       }
       document.getElementById(tabName).style.display = "block";
       evt.currentTarget.className += " active";
+      currentBookmarkTab = tabName;
     }
     function openTabEmail(evt, tabName, type) {
       var i, tabcontent, tablinks;
