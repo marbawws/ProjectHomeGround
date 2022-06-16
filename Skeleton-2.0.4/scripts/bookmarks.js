@@ -14,48 +14,63 @@ function createBookmarkPopup(event, tab){
 
     currentTab.appendChild(addBookmarkTab);
 }
-window.onload = function (){
-    setOnHoverBookmark();
-}
-function setOnHoverBookmark(){
-    var bookmarks = document.getElementsByClassName("bookmark container");
-    for (let i = 0; i < bookmarks.length; i++) {
-        $(bookmarks[i]).hover(
-            function() {
-                var text = document.createElement("p");
-                text.setAttribute("id","bookmarkOnHoverHintText")
-                text.innerHTML = "GO";
-                $(text).css("position", "absolute");
-                $(text).css("top", "50%");
-                $(text).css("left", "50%");
-                $(text).css("transform", "translate(-50%, -50%)");
-                $(text).css("color", "white");
-                // $(text).css("opacity", "1");
-                // $(text).css("user-select", "none" );
-                // var offsets = $(bookmarks[i]).offset();
-                // var top = offsets.top;
-                // var left = offsets.left;
-                // var width = $(bookmarks[i]).width();
-                // var height = $(bookmarks[i]).height();
-                bookmarks[i].appendChild(text);
-                // $(text).css("position", "absolute");
-                // $(text).css("top", top + (height/2));
-                // $(text).css("left", left + (width/2));
-                // $(text).css("cursor", "pointer");
-                // $(text).hover(
-                //     function() {
-                //         $(bookmarks[i]).css("cursor","pointer");
-                //         $(bookmarks[i]).css("opacity", "0.2");
-                // }
-                // );
-            },
-            function(){
-                $(document.getElementById("bookmarkOnHoverHintText")).remove();
+// function hoverOverHintSmoothness(text, div){
+//     displayTextInDiv(text, div);
+//     var papaDiv = div.parentNode;
+//     var imgs = $(papaDiv).find("img");
+//     // $(imgs[0]).css("opacity", "0.2");
+//     $(imgs[0]).css("content","url(../images/plusBlack.svg");
+//     $(imgs[0]).css("cursor","pointer");
+//     $(imgs[0]).css("border","1px solid black");
+//     $(imgs[0]).css("background-color","rgba(255,255,255,0.25)");
+//
+// }
 
-            }
-        );
+// function UNDOhoverOverHintSmoothness(div){
+//     purgeTextInDiv(div)
+//     var papaDiv = div.parentNode;
+//     var imgs = $(papaDiv).find("img");
+//     // $(imgs[0]).css("opacity", "0.2");
+//     $(imgs[0]).css("content","url(../images/plus.svg");
+//     // $(imgs[0]).css("cursor","pointer");
+//     $(imgs[0]).css("border","1px solid white");
+//     $(imgs[0]).css("background-color","rgba(40,40,40,0.25)");
+// }
+
+function displayTextInDiv(text, div){
+    var papaDiv = div.parentNode;
+    var otherPossibleHints = papaDiv.getElementsByClassName("bookmarkTextHint");
+    for (let i = 0; i < otherPossibleHints.length; i++) {
+        console.log("test");
+        $(otherPossibleHints[i]).remove();
     }
+    var textSlot = document.createElement("p");
+    textSlot.setAttribute("class", "bookmarkTextHint");
+    $(textSlot).css("color", "white");
+    $(textSlot).css("text-align", "center");
+    $(textSlot).css("position", "absolute");
+    $(textSlot).css("top", "50%");
+    $(textSlot).css("left", "50%");
+    $(textSlot).css("font-weight", "bold");
+    $(textSlot).css("font-size", "11px");
+    $(textSlot).css("user-select", "none");
+    $(textSlot).css("transform", "translateX(-50%) translateY(-50%)");
+    $(textSlot).css("opacity", "1");
+    textSlot.appendChild(document.createTextNode(text));
+    var middleDiv=papaDiv.getElementsByClassName("middle")[0];
+    $($(middleDiv).find("img")[0]).css("opacity", "0.2");
+    // middleDiv.appendChild(textSlot);
+    $(middleDiv).prepend(textSlot);
 }
+
+function purgeTextInDiv(div){
+    var papaDiv = div.parentNode;
+    var textSlot = papaDiv.querySelector(".bookmarkTextHint");
+    $(textSlot).remove();
+    var imgs = $(papaDiv).find("img");
+    $(imgs[0]).css("opacity", "1");
+}
+
 function addInputs(addBookmarkTab){
 
     var link = document.createElement("input");

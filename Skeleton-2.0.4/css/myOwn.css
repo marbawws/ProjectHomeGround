@@ -13,7 +13,7 @@ html{
 }
 
 div.bookmark{
-    float: left; width: 64px; height: 64px;padding: 0px; margin: 2.5px;border-radius: 15px;
+    float: left; width: 76px; height: 76px;padding: 0px; margin: 2.5px;border-radius: 15px; border: 1px solid black;
 }
 img.bookmark{
     width: 100%; height: 100%;
@@ -21,12 +21,12 @@ img.bookmark{
 /*img.bookmark:hover{*/
 /*    width: 72px; height: 64px;*/
 /*}*/
-.bookmark:hover{
-    /*width: 68px; height: 68px; overflow: visible;*/
-    cursor: pointer;
-    opacity: 0.2;
-    /*width: 72px; height: 72px;*/
-}
+/*div.bookmark:hover{*/
+/*    !*width: 68px; height: 68px; overflow: visible;*!*/
+/*    cursor: pointer;*/
+/*    opacity: 0.2;*/
+/*    !*width: 72px; height: 72px;*!*/
+/*}*/
 /*a.bookmark, a.bookmark:hover,  a.bookmark:focus, a.bookmark:active{*/
 /*    all: unset;*/
 /*    cursor: pointer;*/
@@ -47,9 +47,81 @@ input[type="text"].identification{
     background-size: 25px 25px, 30px 30px;
     background-position: 95% 44%, 2% 44%;
 }
-
-#addBookmarkButton:hover, #addBookmarkButton2:hover, #addBookmarkButton3:hover{
-    content:url(../images/plusBlack.svg);
+.topLeftCorner{
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    /*border-radius: 70px 0px 140px 0px;*/
+    border-radius: 16px;
+    background :url(../images/edit.svg) no-repeat;
+    background-size: 15px 15px;
+    background-position: 50% 50%;
+}
+.topRightCorner{
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    /*border-radius: 0 70px 0 140px;*/
+    border-radius: 16px;
+    background :url(../images/edit.svg) no-repeat;
+    background-size: 15px 15px;
+    background-position: 50% 50%;
+}
+.bottomLeftCorner{
+    position: absolute;
+    bottom: 1px;
+    left: 1px;
+    /*border-radius: 0 140px 0 70px;*/
+    border-radius: 16px;
+    background :url(../images/edit.svg) no-repeat;
+    background-size: 15px 15px;
+    background-position: 50% 50%;
+}
+.bottomRightCorner{
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
+    /*border-radius: 140px 0px 70px 0px;*/
+    border-radius: 16px;
+    background :url(../images/edit.svg) no-repeat;
+    background-size: 15px 15px;
+    background-position: 50% 50%;
+}
+.middle{
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    background-color: rgba(40,40,40,0.15);
+    padding: 0 0 0 0;
+}
+.topLeftCorner:hover, .topRightCorner:hover, .bottomLeftCorner:hover, .bottomRightCorner:hover, .middle:hover{
+    cursor: pointer;
+    opacity: 1;
+    border: 1px solid black;
+    background-color: rgba(255,255,255,0.15);
+}
+.topLeftCorner, .topRightCorner, .bottomLeftCorner, .bottomRightCorner{
+    width: 0%;
+    height: 0%;
+    padding: 11px;
+    box-sizing: border-box;
+    background-color: rgba(40,40,40,0.15);
+}
+.topLeftCorner, .topRightCorner, .bottomLeftCorner, .bottomRightCorner, .middle{
+    border: 1px solid white;
+}
+/*change logos to their black versions*/
+#addBookmarkButton:hover img, #addBookmarkButton2:hover img, #addBookmarkButton3:hover img{
+    content:url(../images/plusBlack.svg) ;
+    opacity: 0.2;
+    /*background-size: 90% 90%;*/
+    /*background-position: 50% 50%;*/
+}
+.bottomLeftCorner:hover {
+    background :url(../images/editBLACK.svg) no-repeat;
+    background-size: 15px 15px;
+    background-position: 50% 50%;
+    background-color: rgba(255,255,255,0.25);
 }
 
 /*.bookmark{*/
