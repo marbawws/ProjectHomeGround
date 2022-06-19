@@ -40,68 +40,52 @@
   <!-- Quick Access -->
 <div id="bookmarksParentDiv" class="container" style="position:absolute; left:20px; top:20px; background-color:rgba(60, 60, 60, 0.45);">
   <div class="tab">
-    <button class="tablinks" onclick="openTab(event, 'tab1')">The big three</button>
-    <button class="tablinks" onclick="openTab(event, 'tab2')">Secondhand</button>
-    <button class="tablinks" onclick="openTab(event, 'tab3')">Misc.</button>
+    <button class="tablinksBookmark" onclick="openTab(event, 'tab1')">The big three</button>
+    <button class="tablinksBookmark" onclick="openTab(event, 'tab2')">Secondhand</button>
+    <button class="tablinksBookmark" onclick="openTab(event, 'tab3')">Misc.</button>
   </div>
-  <div id="tab1" class="tabcontent" style="display: block;">
-    <div class="bookmarks">
+  <div id="tab1" class="tabcontentBookmark" style="display: none;">
+    <div class="bookmarks container">
       <div class="bookmark container" style="">
-        <a href="https://twitter.com" class="bookmark"><img class="bookmark" src="images/twitter.svg"></a>
-      </div>
-      <div class="bookmark container" style="">
-        <div class="middle container" onmouseover="displayTextInDiv('GO', this)" onmouseleave="purgeTextInDiv(this)">
-          <a href="https://twitter.com">
-            <img class="bookmark" src="images/twitter.svg" style=" display: block;">
-          </a>
-        </div>
-        <div class="topLeftCorner container" onmouseover="displayTextInDiv('EXPAND', this)" onmouseleave="purgeTextInDiv(this)"></div>
-        <div class="topRightCorner container" onmouseover="displayTextInDiv('MOVE',this) " onmouseleave="purgeTextInDiv(this)"></div>
-        <div class="bottomLeftCorner container" onmouseover="displayTextInDiv('EDIT',this)" onmouseleave="purgeTextInDiv(this)"></div>
-        <div class="bottomRightCorner container" onmouseover="displayTextInDiv('DELETE',this)" onmouseleave="purgeTextInDiv(this)"></div>
-      </div>
-
-      <div class="bookmark container" style="">
-        <div class="middle container" onmouseover="displayTextInDiv('GO', this)" onmouseleave="purgeTextInDiv(this)">
-          <a href="https://twitch.tv">
-            <img class="bookmark" src="images/twitch.svg" style=" display: block;">
-          </a>
-        </div>
-        <div class="topLeftCorner container" onmouseover="displayTextInDiv('EXPAND', this)" onmouseleave="purgeTextInDiv(this)"></div>
-        <div class="topRightCorner container" onmouseover="displayTextInDiv('MOVE',this) " onmouseleave="purgeTextInDiv(this)"></div>
-        <div class="bottomLeftCorner container" onmouseover="displayTextInDiv('EDIT',this)" onmouseleave="purgeTextInDiv(this)"></div>
-        <div class="bottomRightCorner container" onmouseover="displayTextInDiv('DELETE',this)" onmouseleave="purgeTextInDiv(this)"></div>
-      </div>
-      <div class="bookmark container" style="">
-        <div id="addBookmarkButton" class="middle container" onmouseover="displayTextInDiv('GO', this)" onmouseleave="purgeTextInDiv(this)"
+        <div id="addBookmarkButton" class="middle container" onmouseover="displayTextInDiv('CREATE', this)" onmouseleave="purgeTextInDiv(this)"
              onclick="createBookmarkPopup(event, 'tab1')">
           <img src="images/plus.svg" class="bookmark" style=" display: block;">
         </div>
-        <div class="topLeftCorner container" onmouseover="displayTextInDiv('EXPAND', this)" onmouseleave="purgeTextInDiv(this)"></div>
+<!--        <div class="topLeftCorner container" onmouseover="displayTextInDiv('EXPAND', this)" onmouseleave="purgeTextInDiv(this)"></div>-->
         <div class="topRightCorner container" onmouseover="displayTextInDiv('MOVE',this) " onmouseleave="purgeTextInDiv(this)"></div>
-        <div class="bottomLeftCorner container" onmouseover="displayTextInDiv('EDIT',this)" onmouseleave="purgeTextInDiv(this)"></div>
-        <div class="bottomRightCorner container" onmouseover="displayTextInDiv('DELETE',this)" onmouseleave="purgeTextInDiv(this)"></div>
+<!--        <div class="bottomLeftCorner container" onmouseover="displayTextInDiv('EDIT',this)" onmouseleave="purgeTextInDiv(this)"></div>-->
+<!--        <div class="bottomRightCorner container" onmouseover="displayTextInDiv('DELETE',this)" onmouseleave="purgeTextInDiv(this)"></div>-->
       </div>
     </div>
   </div>
 
-  <div id="tab2" class="tabcontent" style="">
-    <div class="bookmark container" style="">
-      <div id="addBookmarkButton2" class="middle container" style="" onclick="createBookmarkPopup(event, 'tab2')"
-          onmouseover="displayTextInDiv('GO', this)" onmouseleave="purgeTextInDiv(this)">
-        <img src="images/plus.svg" class="bookmark" style=" display: block;">
+  <div id="tab2" class="tabcontentBookmark" style="display: none;">
+    <div class="bookmarks">
+      <div class="bookmark container" style="">
+        <div id="addBookmarkButton2" class="middle container" style="" onclick="createBookmarkPopup(event, 'tab2')"
+             onmouseover="displayTextInDiv('CREATE', this)" onmouseleave="purgeTextInDiv(this)">
+          <img src="images/plus.svg" class="bookmark" style=" display: block;">
+        </div>
+<!--        <div class="topLeftCorner container" onmouseover="displayTextInDiv('EXPAND', this)" onmouseleave="purgeTextInDiv(this)"></div>-->
+        <div class="topRightCorner container" onmouseover="displayTextInDiv('MOVE',this) " onmouseleave="purgeTextInDiv(this)"></div>
+<!--        <div class="bottomLeftCorner container" onmouseover="displayTextInDiv('EDIT',this)" onmouseleave="purgeTextInDiv(this)"></div>-->
+<!--        <div class="bottomRightCorner container" onmouseover="displayTextInDiv('DELETE',this)" onmouseleave="purgeTextInDiv(this)"></div>-->
       </div>
-      <div class="topLeftCorner container" onmouseover="displayTextInDiv('EXPAND', this)" onmouseleave="purgeTextInDiv(this)"></div>
-      <div class="topRightCorner container" onmouseover="displayTextInDiv('MOVE',this) " onmouseleave="purgeTextInDiv(this)"></div>
-      <div class="bottomLeftCorner container" onmouseover="displayTextInDiv('EDIT',this)" onmouseleave="purgeTextInDiv(this)"></div>
-      <div class="bottomRightCorner container" onmouseover="displayTextInDiv('DELETE',this)" onmouseleave="purgeTextInDiv(this)"></div>
     </div>
   </div>
 
-  <div id="tab3" class="tabcontent" style="">
-    <div id="addBookmarkButton3" class="bookmark container" style="" onclick="createBookmarkPopup(event, 'tab3')"
-         onmouseover="displayTextInDiv('GO', this)" onmouseleave="purgeTextInDiv(this)">
-      <img src="images/plus.svg" class="bookmark" style=" display: block;">
+  <div id="tab3" class="tabcontentBookmark" style="display: none;">
+    <div class="bookmarks">
+      <div class="bookmark container" style="">
+        <div id="addBookmarkButton3" class="middle container" style="" onclick="createBookmarkPopup(event, 'tab3')"
+             onmouseover="displayTextInDiv('CREATE', this)" onmouseleave="purgeTextInDiv(this)">
+          <img src="images/plus.svg" class="bookmark" style=" display: block;">
+        </div>
+<!--        <div class="topLeftCorner container" onmouseover="displayTextInDiv('EXPAND', this)" onmouseleave="purgeTextInDiv(this)"></div>-->
+        <div class="topRightCorner container" onmouseover="displayTextInDiv('MOVE',this) " onmouseleave="purgeTextInDiv(this)"></div>
+<!--        <div class="bottomLeftCorner container" onmouseover="displayTextInDiv('EDIT',this)" onmouseleave="purgeTextInDiv(this)"></div>-->
+<!--        <div class="bottomRightCorner container" onmouseover="displayTextInDiv('DELETE',this)" onmouseleave="purgeTextInDiv(this)"></div>-->
+      </div>
     </div>
   </div>
 </div>

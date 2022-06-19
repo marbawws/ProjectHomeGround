@@ -7,46 +7,25 @@ function createBookmarkPopup(event, tab){
     var bookmark = new Bookmark("test","test2","test3");
     var addBookmarkTab=document.createElement("div");
     addBookmarkTab.setAttribute("id","createBookmark" + tab);
-    $(addBookmarkTab).css("padding-top", "5px");
+    $(addBookmarkTab).css("border", "1px solid white");
+    // $(addBookmarkTab).css("margin-top", "10px");
+    $(addBookmarkTab).css("padding", "10px 10px 10px 10px");
+    $(addBookmarkTab).css("border-radius", "16px");
 
     addInputs(addBookmarkTab);
     addButtons(addBookmarkTab, tab);
 
     currentTab.appendChild(addBookmarkTab);
 }
-// function hoverOverHintSmoothness(text, div){
-//     displayTextInDiv(text, div);
-//     var papaDiv = div.parentNode;
-//     var imgs = $(papaDiv).find("img");
-//     // $(imgs[0]).css("opacity", "0.2");
-//     $(imgs[0]).css("content","url(../images/plusBlack.svg");
-//     $(imgs[0]).css("cursor","pointer");
-//     $(imgs[0]).css("border","1px solid black");
-//     $(imgs[0]).css("background-color","rgba(255,255,255,0.25)");
-//
-// }
-
-// function UNDOhoverOverHintSmoothness(div){
-//     purgeTextInDiv(div)
-//     var papaDiv = div.parentNode;
-//     var imgs = $(papaDiv).find("img");
-//     // $(imgs[0]).css("opacity", "0.2");
-//     $(imgs[0]).css("content","url(../images/plus.svg");
-//     // $(imgs[0]).css("cursor","pointer");
-//     $(imgs[0]).css("border","1px solid white");
-//     $(imgs[0]).css("background-color","rgba(40,40,40,0.25)");
-// }
 
 function displayTextInDiv(text, div){
     var papaDiv = div.parentNode;
     var otherPossibleHints = papaDiv.getElementsByClassName("bookmarkTextHint");
-    for (let i = 0; i < otherPossibleHints.length; i++) {
-        console.log("test");
+    for (let i = 0; i < otherPossibleHints.length; i++) { //bandaid fix
         $(otherPossibleHints[i]).remove();
     }
     var textSlot = document.createElement("p");
     textSlot.setAttribute("class", "bookmarkTextHint");
-    $(textSlot).css("color", "white");
     $(textSlot).css("text-align", "center");
     $(textSlot).css("position", "absolute");
     $(textSlot).css("top", "50%");
@@ -56,6 +35,17 @@ function displayTextInDiv(text, div){
     $(textSlot).css("user-select", "none");
     $(textSlot).css("transform", "translateX(-50%) translateY(-50%)");
     $(textSlot).css("opacity", "1");
+    switch (text) {
+        case"GO":
+            $(textSlot).css("color", "black");
+            break;
+        case "CREATE":
+            $(textSlot).css("color", "black");
+            break;
+        default:
+            $(textSlot).css("color", "white");
+            break;
+    }
     textSlot.appendChild(document.createTextNode(text));
     var middleDiv=papaDiv.getElementsByClassName("middle")[0];
     $($(middleDiv).find("img")[0]).css("opacity", "0.2");
@@ -96,17 +86,151 @@ function addInputs(addBookmarkTab){
 function addButtons(addBookmarkTab, tab){
     var cancelButton = document.createElement("button")
     cancelButton.innerText = "CANCEL"
+    $(cancelButton).css("float", "left");
+    cancelButton.setAttribute("onclick", "removeBookmarkPopup("+tab + "," + "createBookmark" + tab+")");
 
     var createButton = document.createElement("button")
-    createButton.setAttribute("onclick", "addBookmark("+tab+")");
+    createButton.setAttribute("onclick", "createBookmark(createBookmark" + tab+")");
     $(createButton).css("float", "right");
+    // $(createButton).css("margin-top", "5px" );
     createButton.innerText = "CREATE"
 
+    var chooseTabSelect = document.createElement("select");
+    chooseTabSelect.setAttribute("class","selectTAB");
+    var tabButtons = document.getElementsByClassName("tablinksBookmark");
+    var index = 1; //uh, just don't ask...
+    for (var tabButton of tabButtons) {
+            var option = document.createElement("option");
+            if(tabButton.classList.contains("active")){ // if the that button is the active tab
+                option.setAttribute("selected", "selected")
+            }
+            option.setAttribute("value", "tab" + index);
+            option.innerText = tabButton.innerText;
+            chooseTabSelect.appendChild(option);
+            index ++;
+    }
+
     addBookmarkTab.appendChild(cancelButton);
+    addBookmarkTab.appendChild(chooseTabSelect);
     addBookmarkTab.appendChild(createButton);
 }
+function removeBookmarkPopup(tab, bookmarkPopup){
+    var bookmarksOfTab = tab.querySelector('.bookmarks');
+    // var bookmarkPopup = currentTab.getElementById("createBookmark" + tab);
+    bookmarksOfTab.style.display = 'block';
+    $(bookmarkPopup).remove();
 
+}
 
-function addBookmark(tab){
+/**
+ * Fetch bookmarks of tab from internal storage and appends it to the page.
+ * @param tab
+ */
+function refreshBookmarks(tab){
+    if( !localStorage.getItem("bookmarks" + tab)){
+        console.log("no bookmarks found for " + tab)
+    } else{
+        var bookmarkList = JSON.parse(localStorage.getItem("bookmarks" + tab));
+        for (const bookmarkListElement of bookmarkList) {
+            displayBookmark(tab, bookmarkListElement);
+        }
+    }
+}
+
+function displayBookmark(tab, bookmark){
+    var bookmarkContainer = document.createElement("div")
+    var middleContainer = document.createElement("div")
+    var topLeftCornerContainer = document.createElement("div")
+    var topRightCornerContainer = document.createElement("div")
+    var bottomLeftCornerContainer = document.createElement("div")
+    var bottomRightCornerContainer = document.createElement("div")
+    var bookmarkLink = document.createElement("a");
+    var bookmarkImage = document.createElement("img");
+    var currentTab = document.getElementById(tab);
+
+    bookmarkContainer.setAttribute("class", "bookmark container");
+    bookmarkContainer.setAttribute("id", bookmark.id);
+    middleContainer.setAttribute("class", "middle container");
+    topLeftCornerContainer.setAttribute("class", "topLeftCorner container");
+    topRightCornerContainer.setAttribute("class", "topRightCorner container");
+    bottomLeftCornerContainer.setAttribute("class", "bottomLeftCorner container");
+    bottomRightCornerContainer.setAttribute("class", "bottomRightCorner container");
+
+    middleContainer.onmouseover = function() {displayTextInDiv('GO', this)};
+    topLeftCornerContainer.onmouseover = function() {displayTextInDiv('EXPAND', this)};
+    topRightCornerContainer.onmouseover = function() {displayTextInDiv('MOVE', this)};
+    bottomLeftCornerContainer.onmouseover = function() {displayTextInDiv('EDIT', this)};
+    bottomRightCornerContainer.onmouseover = function() {displayTextInDiv('DELETE', this)};
+
+    middleContainer.onmouseleave = function() {purgeTextInDiv(this)};
+    topLeftCornerContainer.onmouseleave = function() {purgeTextInDiv(this)};
+    topRightCornerContainer.onmouseleave = function() {purgeTextInDiv(this)};
+    bottomLeftCornerContainer.onmouseleave = function() {purgeTextInDiv(this)};
+    bottomRightCornerContainer.onmouseleave = function() {purgeTextInDiv(this)};
+
+    bookmarkLink.setAttribute("href", bookmark.link);
+    bookmarkImage.setAttribute("class", "bookmark");
+    bookmarkImage.setAttribute("src", bookmark.imageSrc);
+    $(bookmarkImage).css("display", "block");
+
+    //append -ix
+    bookmarkLink.appendChild(bookmarkImage);
+    middleContainer.appendChild(bookmarkLink);
+    bookmarkContainer.appendChild(middleContainer);
+    bookmarkContainer.appendChild(topLeftCornerContainer);
+    bookmarkContainer.appendChild(topRightCornerContainer);
+    bookmarkContainer.appendChild(bottomLeftCornerContainer);
+    bookmarkContainer.appendChild(bottomRightCornerContainer);
+
+    var bookmarks = currentTab.firstElementChild;
+    bookmarks.insertBefore(bookmarkContainer, bookmarks.lastElementChild);// insert before addBookmark widget
+}
+
+/**
+ * Fetch current form information to create a bookmark object and append it to internal storage.
+ * @param tab
+ */
+function createBookmark(bookmarkPopup){ //tabsList are created here too btw
+    var inputs = bookmarkPopup.childNodes;
+    currentTabString = inputs[4].value;
+    var id = currentTabString + "_0"; //example: tab1_0
+
+    var newBookmark = new Bookmark(id,inputs[0].value, inputs[1].value, inputs[2].value);
+    if( !localStorage.getItem("bookmarks" + currentTabString)){
+        var bookmarkList = [];
+        bookmarkList.push(newBookmark);
+        localStorage.setItem("bookmarks" + currentTabString, JSON.stringify(bookmarkList));
+    } else {
+        addBookmark(currentTabString, newBookmark);
+        displayBookmark(currentTabString, newBookmark);
+    }
+}
+
+/**
+ * Appends a bookmark object to the internal storage
+ * @param tab
+ */
+function addBookmark(tab, bookmark){
+    var bookmarkList = JSON.parse(localStorage.getItem("bookmarks" + tab));
+    bookmark.id = currentTabString + "_" + bookmarkList.length;
+    console.log(bookmarkList);
+    bookmarkList.push(bookmark);
+    localStorage.setItem("bookmarks" + currentTabString,  JSON.stringify(bookmarkList));
+}
+
+/**
+ * Deletes a bookmark from the internal storage
+ * @param tab
+ */
+function deleteBookmark(tab){
+    console.log(tab);
+}
+
+/**
+ * Modifies bookmark object from list
+ * @param tab
+ * @param bookmarkId
+ */
+function modifyBookmark(tab, bookmarkId){
     console.log(tab);
 }

@@ -94,6 +94,7 @@ button,
 input[type="submit"],
 input[type="reset"],
 input[type="button"],
+select,
 input[type="text"]{
   display: inline-block;
   height: 38px;
@@ -119,14 +120,17 @@ input[type="submit"]:hover,
 input[type="reset"]:hover,
 input[type="button"]:hover,
 input[type="text"]:hover,
+select:hover,
 .button:focus,
 button:focus,
 input[type="submit"]:focus,
 input[type="reset"]:focus,
 input[type="button"]:focus,
+select:focus,
 input[type="text"]:focus{
   color: #333;
   border-color: #888;
+  background-color: rgba(255,255,255,0.15);
   outline: 0; }
 .button.button-primary,
 button.button-primary,
@@ -203,7 +207,9 @@ select {
   box-shadow: none;
   box-sizing: border-box;
   text-align: left;
-  text-transform: none;}
+  text-transform: none;
+color: white;
+}
 /* Removes awkward default styles on some inputs for iOS */
 input[type="email"],
 input[type="number"],
