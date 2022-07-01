@@ -24,34 +24,19 @@ function displayTextInDiv(text, div, color){
     for (let i = 0; i < otherPossibleHints.length; i++) { //bandaid fix
         $(otherPossibleHints[i]).remove();
     }
-    var textSlot = document.createElement("p");
+    var textSlot = document.createElement("span");
     textSlot.setAttribute("class", "bookmarkTextHint");
-    // $(textSlot).css("text-align", "center");
-    // $(textSlot).css("position", "absolute");
-    // $(textSlot).css("top", "50%");
-    // $(textSlot).css("left", "50%");
-    // $(textSlot).css("font-weight", "bold");
-    // $(textSlot).css("font-size", "11px");
-    // $(textSlot).css("user-select", "none");
-    // $(textSlot).css("transform", "translateX(-50%) translateY(-50%)");
-    // $(textSlot).css("opacity", "1");
     $(textSlot).css("color", color);
-    // switch (text) {
-    //     case"GO":
-    //         $(textSlot).css("color", "black");
-    //         break;
-    //     case "CREATE":
-    //         $(textSlot).css("color", "black");
-    //         break;
-    //     default:
-    //         $(textSlot).css("color", "white");
-    //         break;
-    // }
     textSlot.appendChild(document.createTextNode(text));
     var middleDiv=papaDiv.getElementsByClassName("middle")[0];
-    $($(middleDiv).find("img")[0]).css("opacity", "0.2");
+    var img = $(middleDiv).find("img")[0];
+    $(img).css("opacity", "0.2");
     // middleDiv.appendChild(textSlot);
-    $(middleDiv).prepend(textSlot);
+    if(text === "GO" || text === "CREATE") { // if "GO" put text under the image so it's not clickable
+        $(middleDiv).prepend(textSlot);
+    } else{
+        $(middleDiv).append(textSlot);
+    }
 }
 
 function purgeTextInDiv(div){
@@ -132,9 +117,14 @@ function refreshBookmarks(tab){
         console.log("no bookmarks found for " + tab)
     } else{
         var bookmarkList = JSON.parse(localStorage.getItem("bookmarks" + tab));
-        for (const bookmarkListElement of bookmarkList) {
-            displayBookmark(bookmarkListElement);
-        }
+        displayBookmarks(bookmarkList,tab)
+    }
+}
+
+function displayBookmarks(bookmarkList, tab){
+    var bookmarks = getTabById(tab).firstElementChild;
+    for (const bookmarkListElement of bookmarkList) {
+        bookmarks.insertBefore(displayBookmark(bookmarkListElement), bookmarks.lastElementChild);// insert before addBookmark widget
     }
 }
 
@@ -196,8 +186,7 @@ function displayBookmark(bookmark){
     bookmarkContainer.appendChild(bottomLeftCornerContainer);
     bookmarkContainer.appendChild(bottomRightCornerContainer);
 
-    var bookmarks = currentTab.firstElementChild;
-    bookmarks.insertBefore(bookmarkContainer, bookmarks.lastElementChild);// insert before addBookmark widget
+    return bookmarkContainer;
 }
 
 /**
@@ -206,8 +195,9 @@ function displayBookmark(bookmark){
  */
 function createBookmark(bookmarkPopup){ //tabsList are created here too btw
     var inputs = bookmarkPopup.childNodes;
-    currentTabString = inputs[4].value;
+    var currentTabString = inputs[4].value;
     var id = currentTabString + "_0"; //example: tab1_0
+    var bookmarks = getTabById(currentTabString).firstElementChild;
 
     var newBookmark = new Bookmark(id,inputs[0].value, inputs[1].value, inputs[2].value, currentTabString);
     console.log(JSON.parse(localStorage.getItem("bookmarks" + currentTabString)));
@@ -216,12 +206,17 @@ function createBookmark(bookmarkPopup){ //tabsList are created here too btw
         var bookmarkList = [];
         bookmarkList.push(newBookmark);
         localStorage.setItem("bookmarks" + currentTabString, JSON.stringify(bookmarkList));
+        bookmarks.insertBefore(displayBookmark(newBookmark), bookmarks.lastElementChild);// insert before addBookmark widget
     } else {
         addBookmark(newBookmark);
-        displayBookmark(newBookmark);
+        bookmarks.insertBefore(displayBookmark(newBookmark), bookmarks.lastElementChild);// insert before addBookmark widget
     }
+    removeBookmarkPopup(bookmarkPopup.parentElement, bookmarkPopup)
 }
 
+function getTabById(id){
+    return document.getElementById(id);
+}
 /**
  * Appends a bookmark object to the internal storage
  * @param bookmark
@@ -263,9 +258,15 @@ function removeBookmarkFromList(tab, id ){
  */
 function deleteBookmark(bookmarkBottomRightDIV){
     var bookmarkElement = bookmarkBottomRightDIV.parentElement;
+    var tab = (bookmarkElement.parentElement).parentElement;
     console.log(bookmarkElement);
     removeBookmarkFromList(((bookmarkElement.parentElement).parentElement).id, bookmarkElement.id);
     $(bookmarkElement).remove();
+    var notification = new TimedNotification("Bookmark Deleted", 5000);
+    notification.generateDomElement();
+    tab.prepend(notification.domElement); //tab
+    notification.startTimer();
+    // notification.deleteDomElement();
 }
 
 /**

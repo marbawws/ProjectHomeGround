@@ -40,11 +40,11 @@
   <!-- Quick Access -->
 <div id="bookmarksParentDiv" class="container" style="position:absolute; left:20px; top:20px; background-color:rgba(60, 60, 60, 0.45);">
   <div class="tab">
-    <button class="tablinksBookmark" onclick="openTab(event, 'tab1')">The big three</button>
-    <button class="tablinksBookmark" onclick="openTab(event, 'tab2')">Secondhand</button>
-    <button class="tablinksBookmark" onclick="openTab(event, 'tab3')">Misc.</button>
+    <button class="tablinksBookmark active" onclick="openTab(tab1, this)">The big three</button>
+    <button class="tablinksBookmark" onclick="openTab(tab2, this)">Secondhand</button>
+    <button class="tablinksBookmark" onclick="openTab(tab3, this)">Misc.</button>
   </div>
-  <div id="tab1" class="tabcontentBookmark" style="display: none;">
+  <div id="tab1" class="tabcontentBookmark fetched" style="display: block;">
     <div class="bookmarks container">
       <div class="bookmark container" style="">
         <p class="bookmarkName">Add New</p>
@@ -137,6 +137,7 @@
   <script type="text/javascript" src="../scripts/EmailsSpecificFunctions.js"></script>
   <script type="text/javascript" src="../scripts/Bookmark.js"></script>
   <script type="text/javascript" src="../scripts/bookmarks.js"></script>
+  <script type="text/javascript" src="../scripts/Notifications.js"></script>
 
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->

@@ -1,15 +1,16 @@
 var gmailFetched = false;
 var outlookSchoolFetched = false;
 var outlookPersonalFetched = false;
+var waitForPage = true;
 
-var tab1Fetched = false;
-var tab2Fetched = false;
-var tab3Fetched = false;
+    window.onload = function() {
+        // var tablinks = document.getElementsByClassName("tablinksBookmark");
+        // var tabcontent = document.getElementsByClassName("tabcontentBookmark");
+        // openTab(tabcontent[0],tablinks[0])
+        refreshBookmarks("tab1");
+    };
+    function openTab(tab, button) {
 
-window.onload = function() {
-
-};
-    function openTab(evt, tabName) {
       var i, tabcontent, tablinks;
       tabcontent = document.getElementsByClassName("tabcontentBookmark");
       for (i = 0; i < tabcontent.length; i++) {
@@ -17,29 +18,16 @@ window.onload = function() {
       }
       tablinks = document.getElementsByClassName("tablinksBookmark");
       for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
+        tablinks[i].classList.remove("active");
       }
-      document.getElementById(tabName).style.display = "block";
-      evt.currentTarget.className += " active";
-
-      switch (tabName){
-          case 'tab1':
-              tab1Fetched = verifyAndRefresh(tab1Fetched, tabName);
-              break;
-          case 'tab2':
-              tab2Fetched = verifyAndRefresh(tab2Fetched, tabName);
-              break;
-          case 'tab3':
-              tab3Fetched = verifyAndRefresh(tab3Fetched, tabName);
-              break;
+      tab.style.display = "block";
+      button.className += " active";
+      if(tab.classList.contains("fetched")){
+        console.log("tab already fetched");
+      } else{
+        refreshBookmarks(tab.id);
+        tab.className += " fetched";
       }
-    }
-    function verifyAndRefresh(tabFetched, tabName){
-        if(!tabFetched){
-            tabFetched = true;
-            refreshBookmarks(tabName);
-        }
-        return tabFetched;
     }
     function openTabEmail(evt, tabName, type) {
       var i, tabcontent, tablinks;
