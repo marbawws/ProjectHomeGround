@@ -259,14 +259,29 @@ function removeBookmarkFromList(tab, id ){
 function deleteBookmark(bookmarkBottomRightDIV){
     var bookmarkElement = bookmarkBottomRightDIV.parentElement;
     var tab = (bookmarkElement.parentElement).parentElement;
+    var bookmarkName = bookmarkElement.getElementsByClassName("bookmarkName")[0].innerHTML;
     console.log(bookmarkElement);
-    removeBookmarkFromList(((bookmarkElement.parentElement).parentElement).id, bookmarkElement.id);
-    $(bookmarkElement).remove();
-    var notification = new TimedNotification("Bookmark Deleted", 5000);
+    $(bookmarkElement).css("display","none");
+
+    var notification = new TimedBookmarkDeletedNotification("Bookmark \""+ bookmarkName +"\" Deleted", 5000, bookmarkElement);
     notification.generateDomElement();
     tab.prepend(notification.domElement); //tab
-    notification.startTimer();
-    // notification.deleteDomElement();
+    notification.startTimer("actuallyDeleteBookmarkThisTimeISwear("+ bookmarkElement.id + ")");
+}
+
+function actuallyDeleteBookmarkThisTimeISwear(bookmark){
+    removeBookmarkFromList(((bookmark.parentElement).parentElement).id, bookmark.id);
+    $(bookmark).remove();
+    console.log(bookmark.id + " deleted")
+}
+
+function bookmarkSavedFromDeletion(bookmark){
+    var tab = (bookmark.parentElement).parentElement;
+    var bookmarkName = bookmark.getElementsByClassName("bookmarkName")[0].innerHTML;
+    var notification = new TimedNotification(bookmarkName + " restored wooo!", 1000 );
+    notification.generateDomElement();
+    tab.prepend(notification.domElement); //tab
+    notification.startTimer("");
 }
 
 /**
