@@ -14,6 +14,14 @@ class NotificationDOM {
         this._information = value;
     }
 
+    /**
+     *
+     * @param colorString hex, rgba or color
+     */
+    setInformationBackgroundColor(colorString) {
+        var information = (this.domElement).getElementsByTagName("p")[0];
+        $(information).css("background-color", colorString);
+    }
     constructor(_information) {
 
         this._information = _information;
@@ -47,9 +55,6 @@ class NotificationDOM {
     dismissed(){
         this.deleteDomElement();
     }
-}
-function deleteNotificationDom(Notification){
-    if (Notification.isins){}
 }
 class TimedNotification extends NotificationDOM{
     get domElement() {

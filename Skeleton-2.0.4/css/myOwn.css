@@ -13,9 +13,25 @@ html{
 }
 div.Notification{
     opacity: 1;
+    margin-bottom: 5px;
 }
+div.viewer{
+    margin-bottom: 10px;
+    padding: 20px;
+    border: 1px solid white;
+}
+
 p.Notification{
-    margin:05px 0 8px 5px; padding:0; text-transform: capitalize;
+    margin:10px 0 5px 0; padding:3px; text-transform: capitalize; font-weight: bold;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid white;
+    color: white;
+    max-width:46ch;
+    word-wrap:break-word;
+}
+button.Notification{
+    margin: 5px 0 10px 0;
 }
 div.progressBarContainer{
 padding: 0; height: 12px; overflow: hidden;
@@ -25,9 +41,6 @@ div.progressBar{
 }
 p.progressBar{
  margin: 0; padding: 0; height: 12px; font-size: 11px;text-align: center;font-weight: bold;
-}
-p.Notification{
-    color: white;
 }
 div.bookmarks{
     max-width: 416.7px; margin-bottom: 5px; max-height: 240px; overflow:scroll ;

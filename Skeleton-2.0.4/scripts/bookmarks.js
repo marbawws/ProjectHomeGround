@@ -12,10 +12,45 @@ function createBookmarkPopup(event, tab){
     $(addBookmarkTab).css("padding", "10px 10px 10px 10px");
     $(addBookmarkTab).css("border-radius", "16px");
 
-    addInputs(addBookmarkTab);
+    var bookmarkElement = createBookmarkViewer(tab);
+
+    addInputs(addBookmarkTab, bookmarkElement);
     addButtons(addBookmarkTab, tab);
 
     currentTab.appendChild(addBookmarkTab);
+}
+
+/**
+ * Viewer to see what you're creating, useless but cool af
+ * @param addBookmarkTab
+ * @param tab
+ */
+function createBookmarkViewer(tab) {
+    // create null bookmark
+    var tabElement= getTabById(tab);
+    var emptyBookmark = new Bookmark("forShow" + tab, "", "","",  tab);
+    var container = document.createElement("div");
+    container.setAttribute("id", "viewer" + tab);
+    container.setAttribute("class", "viewer container");
+    // $(container).css("width", "50%");
+
+    var bookmarkElement = displayBookmark(emptyBookmark);
+    $(bookmarkElement).css("margin", "0 0 0 calc(50% - 36px) ");
+
+    container.appendChild(bookmarkElement);
+    tabElement.appendChild(container);
+
+    return bookmarkElement;
+}
+
+function updateBookmarkViewer(addBookmarkTab, bookmarkElement){
+    var inputs = addBookmarkTab.getElementsByTagName("input");
+    var bookmarkName = bookmarkElement.getElementsByClassName("bookmarkName")[0];
+    var bookmarkLink = bookmarkElement.getElementsByTagName("a")[0];
+    var bookmarkImage = bookmarkElement.getElementsByTagName("img")[0];
+    bookmarkLink.href = inputs[0].value;
+    bookmarkImage.src = inputs[1].value;
+    bookmarkName.innerText = inputs[2].value;
 }
 
 function displayTextInDiv(text, div, color){
@@ -47,23 +82,33 @@ function purgeTextInDiv(div){
     $(imgs[0]).css("opacity", "1");
 }
 
-function addInputs(addBookmarkTab){
+function addInputs(addBookmarkTab, bookmarkElement){
 
     var link = document.createElement("input");
     link.setAttribute("type", "text");
     link.setAttribute("class", "links");
     link.setAttribute("placeholder", "LINK");
+    link.addEventListener('input', function (evt){
+        updateBookmarkViewer(addBookmarkTab, bookmarkElement);
+    });
 
 
     var logo = document.createElement("input");
     logo.setAttribute("type", "text");
     logo.setAttribute("class", "links");
     logo.setAttribute("placeholder", "LOGO");
+    logo.addEventListener('input', function (evt){
+        updateBookmarkViewer(addBookmarkTab, bookmarkElement);
+    });
+    // logo.onkeypress = function (){updateBookmarkViewer(addBookmarkTab, bookmarkElement)};
 
     var linkname = document.createElement("input");
     linkname.setAttribute("type", "text");
     linkname.setAttribute("class", "identification");
     linkname.setAttribute("placeholder", "NAME");
+    linkname.addEventListener('input', function (evt){
+        updateBookmarkViewer(addBookmarkTab, bookmarkElement);
+    });
 
     addBookmarkTab.appendChild(link);
     addBookmarkTab.appendChild(logo);
@@ -102,9 +147,11 @@ function addButtons(addBookmarkTab, tab){
 }
 function removeBookmarkPopup(tab, bookmarkPopup){
     var bookmarksOfTab = tab.querySelector('.bookmarks');
+    var viewer = document.getElementById("viewer" + tab.id);
     // var bookmarkPopup = currentTab.getElementById("createBookmark" + tab);
     bookmarksOfTab.style.display = 'block';
     $(bookmarkPopup).remove();
+    $(viewer).remove();
 
 }
 
@@ -265,6 +312,7 @@ function deleteBookmark(bookmarkBottomRightDIV){
 
     var notification = new TimedBookmarkDeletedNotification("Bookmark \""+ bookmarkName +"\" Deleted", 5000, bookmarkElement);
     notification.generateDomElement();
+    notification.setInformationBackgroundColor("rgba(200, 0, 0, 0.1)")
     tab.prepend(notification.domElement); //tab
     notification.startTimer("actuallyDeleteBookmarkThisTimeISwear("+ bookmarkElement.id + ")");
 }
@@ -280,6 +328,7 @@ function bookmarkSavedFromDeletion(bookmark){
     var bookmarkName = bookmark.getElementsByClassName("bookmarkName")[0].innerHTML;
     var notification = new TimedNotification(bookmarkName + " restored wooo!", 1000 );
     notification.generateDomElement();
+    notification.setInformationBackgroundColor("rgba(0, 0, 200, 0.1)")
     tab.prepend(notification.domElement); //tab
     notification.startTimer("");
 }
