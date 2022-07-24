@@ -12,9 +12,9 @@ function createBookmarkPopup(event, tab){
     $(addBookmarkTab).css("padding", "10px 10px 10px 10px");
     $(addBookmarkTab).css("border-radius", "16px");
 
-    var bookmarkElement = createBookmarkViewer(tab);
+    var bookmarkViewerElement = createBookmarkViewer(tab);
 
-    addInputs(addBookmarkTab, bookmarkElement);
+    addInputs(addBookmarkTab, bookmarkViewerElement);
     addButtons(addBookmarkTab, tab);
 
     currentTab.appendChild(addBookmarkTab);
@@ -43,14 +43,21 @@ function createBookmarkViewer(tab) {
     return bookmarkElement;
 }
 
-function updateBookmarkViewer(addBookmarkTab, bookmarkElement){
-    var inputs = addBookmarkTab.getElementsByTagName("input");
-    var bookmarkName = bookmarkElement.getElementsByClassName("bookmarkName")[0];
-    var bookmarkLink = bookmarkElement.getElementsByTagName("a")[0];
-    var bookmarkImage = bookmarkElement.getElementsByTagName("img")[0];
-    bookmarkLink.href = inputs[0].value;
-    bookmarkImage.src = inputs[1].value;
-    bookmarkName.innerText = inputs[2].value;
+function updateLinkViewer(link, bookmarkViewerElement){
+    var bookmarkLink = bookmarkViewerElement.getElementsByTagName("a")[0];
+    if(!((link.value).includes("https://")) && !((link.value).includes("http://")) ){
+        bookmarkLink.href = "https://" + link.value;
+    } else {
+        bookmarkLink.href = link.value;
+    }
+}
+function updateNameViewer(name, bookmarkViewerElement){
+    var bookmarkName = bookmarkViewerElement.getElementsByClassName("bookmarkName")[0];
+    bookmarkName.innerText = name.value;
+}
+function updateImageViewer(image, bookmarkViewerElement){
+    var bookmarkImage = bookmarkViewerElement.getElementsByTagName("img")[0];
+    bookmarkImage.src = image.value;
 }
 
 function displayTextInDiv(text, div, color){
@@ -81,15 +88,39 @@ function purgeTextInDiv(div){
     var imgs = $(papaDiv).find("img");
     $(imgs[0]).css("opacity", "1");
 }
+function autoFillBookmarkForm(link, logo, name){
+    var currentLink = link.value; //test if link is valid
+    if(!((currentLink).includes("https://")) && !((currentLink).includes("http://")) ){
+        currentLink = "https://" + currentLink;
+    }
+    try {
+        var url = new URL(currentLink);
+        logo.value = url.origin + "/favicon.ico";
+        logo.dispatchEvent(new Event("input"));
 
-function addInputs(addBookmarkTab, bookmarkElement){
+        var hostname = url.hostname;
+        var hostnameParts = hostname.split('.');
+        if(hostnameParts.length === 2){// no prefix (length is 2)
+            hostname = hostnameParts[0];
+        } else{ // prefix detected
+            hostname = hostnameParts[1];
+        }
+        name.value = (hostname).charAt(0).toUpperCase() + hostname.slice(1); // capitilize
+        name.dispatchEvent(new Event("input"));
+    } catch (_) {
+
+    }
+}
+
+function addInputs(addBookmarkTab, bookmarkViewerElement){
 
     var link = document.createElement("input");
     link.setAttribute("type", "text");
     link.setAttribute("class", "links");
     link.setAttribute("placeholder", "LINK");
     link.addEventListener('input', function (evt){
-        updateBookmarkViewer(addBookmarkTab, bookmarkElement);
+        updateLinkViewer(link, bookmarkViewerElement);
+        autoFillBookmarkForm(link, logo, name);
     });
 
 
@@ -98,21 +129,21 @@ function addInputs(addBookmarkTab, bookmarkElement){
     logo.setAttribute("class", "links");
     logo.setAttribute("placeholder", "LOGO");
     logo.addEventListener('input', function (evt){
-        updateBookmarkViewer(addBookmarkTab, bookmarkElement);
+        updateImageViewer(logo, bookmarkViewerElement);
     });
     // logo.onkeypress = function (){updateBookmarkViewer(addBookmarkTab, bookmarkElement)};
 
-    var linkname = document.createElement("input");
-    linkname.setAttribute("type", "text");
-    linkname.setAttribute("class", "identification");
-    linkname.setAttribute("placeholder", "NAME");
-    linkname.addEventListener('input', function (evt){
-        updateBookmarkViewer(addBookmarkTab, bookmarkElement);
+    var name = document.createElement("input");
+    name.setAttribute("type", "text");
+    name.setAttribute("class", "identification");
+    name.setAttribute("placeholder", "NAME");
+    name.addEventListener('input', function (evt){
+        updateNameViewer(name, bookmarkViewerElement);
     });
 
     addBookmarkTab.appendChild(link);
     addBookmarkTab.appendChild(logo);
-    addBookmarkTab.appendChild(linkname);
+    addBookmarkTab.appendChild(name);
 }
 function addButtons(addBookmarkTab, tab){
     var cancelButton = document.createElement("button")
@@ -219,7 +250,7 @@ function displayBookmark(bookmark){
     $(bookmarkImage).css("display", "block");
 
     bookmarkName.setAttribute("class", "bookmarkName");
-    bookmarkName.onmouseenter=function() {displayTextInDiv(bookmark.name, this, "black")};
+    bookmarkName.onmouseenter=function() {displayTextInDiv(this.innerText, this, "black")};
     bookmarkName.onmouseleave=function() {purgeTextInDiv(this);};
     bookmarkName.appendChild(document.createTextNode(bookmark.name));
 
@@ -245,7 +276,9 @@ function createBookmark(bookmarkPopup){ //tabsList are created here too btw
     var currentTabString = inputs[4].value;
     var id = currentTabString + "_0"; //example: tab1_0
     var bookmarks = getTabById(currentTabString).firstElementChild;
-
+    if(!((inputs[0].value).includes("https://")) || !((inputs[0].value).includes("http://")) ){
+        inputs[0].value = "https://" + inputs[0].value;
+    }
     var newBookmark = new Bookmark(id,inputs[0].value, inputs[1].value, inputs[2].value, currentTabString);
     console.log(JSON.parse(localStorage.getItem("bookmarks" + currentTabString)));
     if( !localStorage.getItem("bookmarks" + currentTabString)){
