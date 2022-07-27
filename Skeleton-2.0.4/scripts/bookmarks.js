@@ -1,4 +1,4 @@
-function createBookmarkPopup(event, tab){
+function createBookmarkPopup(tab){
     //hide current bookmarks to replace it later
     var currentTab = document.getElementById(tab);
     var bookmarksOfTab = currentTab.querySelector('.bookmarks');
@@ -88,6 +88,7 @@ function purgeTextInDiv(div){
     var imgs = $(papaDiv).find("img");
     $(imgs[0]).css("opacity", "1");
 }
+
 function autoFillBookmarkForm(link, logo, name){
     var currentLink = link.value; //test if link is valid
     if(!((currentLink).includes("https://")) && !((currentLink).includes("http://")) ){
@@ -95,7 +96,7 @@ function autoFillBookmarkForm(link, logo, name){
     }
     try {
         var url = new URL(currentLink);
-        logo.value = url.origin + "/favicon.ico";
+        logo.value = "https://icon.horse/icon/" + url.hostname;
         logo.dispatchEvent(new Event("input"));
 
         var hostname = url.hostname;
@@ -152,7 +153,7 @@ function addButtons(addBookmarkTab, tab){
     cancelButton.setAttribute("onclick", "removeBookmarkPopup("+tab + "," + "createBookmark" + tab+")");
 
     var createButton = document.createElement("button")
-    createButton.setAttribute("onclick", "createBookmark(createBookmark" + tab+")");
+    createButton.setAttribute("onclick", "onAddBookmarkButtonClick(createBookmark" + tab+")");
     $(createButton).css("float", "right");
     // $(createButton).css("margin-top", "5px" );
     createButton.innerText = "CREATE"
@@ -160,16 +161,16 @@ function addButtons(addBookmarkTab, tab){
     var chooseTabSelect = document.createElement("select");
     chooseTabSelect.setAttribute("class","selectTAB");
     var tabButtons = document.getElementsByClassName("tablinksBookmark");
-    var index = 1; //uh, just don't ask...
-    for (var tabButton of tabButtons) {
-            var option = document.createElement("option");
-            if(tabButton.classList.contains("active")){ // if the that button is the active tab
-                option.setAttribute("selected", "selected")
-            }
-            option.setAttribute("value", "tab" + index);
-            option.innerText = tabButton.innerText;
-            chooseTabSelect.appendChild(option);
-            index ++;
+    var tabDIVs = document.getElementsByClassName("tabcontentBookmark");
+
+    for (let i = 0; i < tabButtons.length; i++) {
+        var option = document.createElement("option");
+        if(tabButtons[i].classList.contains("active")){ // if the that button is the active tab
+            option.setAttribute("selected", "selected")
+        }
+        option.setAttribute("value", tabDIVs[i].id);
+        option.innerText = tabButtons[i].innerText;
+        chooseTabSelect.appendChild(option);
     }
 
     addBookmarkTab.appendChild(cancelButton);
@@ -191,18 +192,67 @@ function removeBookmarkPopup(tab, bookmarkPopup){
  * @param tab
  */
 function refreshBookmarks(tab){
-    if( !localStorage.getItem("bookmarks" + tab)){
-        console.log("no bookmarks found for " + tab)
+    var bookmarkList = [];
+    if( !localStorage.getItem("bookmarks" + tab)){ //if there's no bookmark add the default widget
+        localStorage.setItem("index" + tab, 1); // index always one ahead
+        bookmarkList.push(new Bookmark("Add" + tab, "", "", "", tab));// add
+        localStorage.setItem("bookmarks" + tab, JSON.stringify(bookmarkList));
     } else{
-        var bookmarkList = JSON.parse(localStorage.getItem("bookmarks" + tab));
-        displayBookmarks(bookmarkList,tab)
+        bookmarkList = JSON.parse(localStorage.getItem("bookmarks" + tab));
+        var bookmarksContainer = getTabById(tab).getElementsByClassName("bookmarks container");
+        $(bookmarksContainer).empty();// man... jquery is funny
     }
+    displayBookmarks(bookmarkList,tab)
+}
+function generateAddBookmarkBookmark(tab){
+    var bookmarksContainer = getTabById(tab).getElementsByClassName("bookmarks container")[0];
+
+    var bookmarkContainer = document.createElement("div")
+    var middleContainer = document.createElement("div")
+    var topRightCornerContainer = document.createElement("div")
+    var bookmarkImage = document.createElement("img");
+    var bookmarkName = document.createElement("p");
+
+    bookmarkContainer.setAttribute("class", "bookmark container");
+    bookmarkContainer.setAttribute("id", "Add" + tab);
+    middleContainer.setAttribute("class", "middle container");
+    topRightCornerContainer.setAttribute("class", "topRightCorner container");
+
+    middleContainer.onmouseover = function() {displayTextInDiv('CREATE', this, "white")};
+    topRightCornerContainer.onmouseover = function() {displayTextInDiv('MOVE', this, "white")};
+
+    middleContainer.onmouseleave = function() {purgeTextInDiv(this)};
+    topRightCornerContainer.onmouseleave = function() {purgeTextInDiv(this)};
+
+    middleContainer.onclick = function() {createBookmarkPopup( tab)};
+    topRightCornerContainer.onclick = function() {moveBookmark(this)};
+
+    bookmarkImage.setAttribute("class", "bookmark");
+    bookmarkImage.setAttribute("src", "images/plus.svg");
+    $(bookmarkImage).css("display", "block");
+
+    bookmarkName.setAttribute("class", "bookmarkName");
+    bookmarkName.onmouseenter=function() {displayTextInDiv(this.innerText, this, "black")};
+    bookmarkName.onmouseleave=function() {purgeTextInDiv(this);};
+    bookmarkName.appendChild(document.createTextNode("Add New"));
+
+    //append -ix
+    middleContainer.appendChild(bookmarkImage);
+    bookmarkContainer.appendChild(bookmarkName);
+    bookmarkContainer.appendChild(middleContainer);
+    bookmarkContainer.appendChild(topRightCornerContainer);
+
+    bookmarksContainer.appendChild(bookmarkContainer);
 }
 
 function displayBookmarks(bookmarkList, tab){
-    var bookmarks = getTabById(tab).firstElementChild;
+    var bookmarks = getTabById(tab).getElementsByClassName("bookmarks container")[0];
     for (const bookmarkListElement of bookmarkList) {
-        bookmarks.insertBefore(displayBookmark(bookmarkListElement), bookmarks.lastElementChild);// insert before addBookmark widget
+        if(bookmarkListElement.id === "Add" + tab){
+            generateAddBookmarkBookmark(tab);
+        } else{
+            bookmarks.appendChild(displayBookmark(bookmarkListElement));// going national baby
+        }
     }
 }
 
@@ -241,7 +291,7 @@ function displayBookmark(bookmark){
     middleContainer.onclick = function() {};
     topLeftCornerContainer.onclick = function() {expandBookmark(this)};
     topRightCornerContainer.onclick = function() {moveBookmark(this)};
-    bottomLeftCornerContainer.onclick = function() {editBookmark(this);};
+    bottomLeftCornerContainer.onclick = function() {editBookmark(this.parentNode);};
     bottomRightCornerContainer.onclick = function() {deleteBookmark(this); };
 
     bookmarkLink.setAttribute("href", bookmark.link);
@@ -267,31 +317,39 @@ function displayBookmark(bookmark){
     return bookmarkContainer;
 }
 
+function onAddBookmarkButtonClick(bookmarkPopup){
+    var inputs = bookmarkPopup.childNodes;
+    createBookmark(inputs[4].value, inputs[0].value, inputs[1].value, inputs[2].value);
+    removeBookmarkPopup(bookmarkPopup.parentElement, bookmarkPopup);
+}
+
 /**
  * Fetch current form information to create a bookmark object and append it to internal storage.
- * @param tab
+ * @param tabId
+ * @param link
+ * @param imageSrc
+ * @param name
  */
-function createBookmark(bookmarkPopup){ //tabsList are created here too btw
-    var inputs = bookmarkPopup.childNodes;
-    var currentTabString = inputs[4].value;
-    var id = currentTabString + "_0"; //example: tab1_0
-    var bookmarks = getTabById(currentTabString).firstElementChild;
-    if(!((inputs[0].value).includes("https://")) || !((inputs[0].value).includes("http://")) ){
-        inputs[0].value = "https://" + inputs[0].value;
+function createBookmark(tabId, link, imageSrc, name){ //tabsList are created here too btw
+    var id = tabId + "_0"; //example: tab1_0
+    var bookmarks = getTabById(tabId).firstElementChild;
+    if(!((link).includes("https://")) && !((link).includes("http://")) ){
+        link = "https://" + link;
     }
-    var newBookmark = new Bookmark(id,inputs[0].value, inputs[1].value, inputs[2].value, currentTabString);
-    console.log(JSON.parse(localStorage.getItem("bookmarks" + currentTabString)));
-    if( !localStorage.getItem("bookmarks" + currentTabString)){
-        localStorage.setItem("index" + currentTabString, 1); // index always one ahead
-        var bookmarkList = [];
-        bookmarkList.push(newBookmark);
-        localStorage.setItem("bookmarks" + currentTabString, JSON.stringify(bookmarkList));
-        bookmarks.insertBefore(displayBookmark(newBookmark), bookmarks.lastElementChild);// insert before addBookmark widget
+    var newBookmark = new Bookmark(id,link, imageSrc, name, tabId);
+    console.log(JSON.parse(localStorage.getItem("bookmarks" + tabId)));
+    if( !localStorage.getItem("bookmarks" + tabId)){
+        // localStorage.setItem("index" + currentTabString, 1); // index always one ahead
+        // var bookmarkList = [];
+        // bookmarkList.push(new Bookmark("Add" + currentTabString, "", "", "", currentTabString));// add
+        // bookmarkList.push(newBookmark);
+        // localStorage.setItem("bookmarks" + currentTabString, JSON.stringify(bookmarkList));
+        // bookmarks.insertBefore(displayBookmark(newBookmark), bookmarks.lastElementChild);// insert before addBookmark widget
+        console.log("The bookmark list for tab: " + tabId + " should really exist, but it doesn't somehow.. refresh the page");
     } else {
         addBookmark(newBookmark);
-        bookmarks.insertBefore(displayBookmark(newBookmark), bookmarks.lastElementChild);// insert before addBookmark widget
+        bookmarks.appendChild(displayBookmark(newBookmark));//
     }
-    removeBookmarkPopup(bookmarkPopup.parentElement, bookmarkPopup)
 }
 
 function getTabById(id){
@@ -368,23 +426,28 @@ function bookmarkSavedFromDeletion(bookmark){
 
 /**
  * Modifies bookmark object from list
- * @param tab
- * @param bookmarkId
+ * @param newBookmark
  */
-function modifyBookmarkFromList(newBookmark){
+function modifyBookmarkFromList(newBookmark, oldTabId){
     var modified = false;
-    if( !localStorage.getItem("bookmarks" + newBookmark.tab)){
-        console.log("no bookmarks found for " + newBookmark.tab)
-    } else{
-        var bookmarkList = JSON.parse(localStorage.getItem("bookmarks" + newBookmark.tab));
-        for (let i = 0; i < bookmarkList.length || !modified; i++) {
-            if((bookmarkList[i]).id === id){
-                modified = true;
-                //replace
-                //put the list back in the storage
+    if(oldTabId === newBookmark.tab){
+        if( !localStorage.getItem("bookmarks" + newBookmark.tab)){
+            console.log("no bookmarks found for " + newBookmark.tab)
+        } else{
+            var bookmarkList = JSON.parse(localStorage.getItem("bookmarks" + newBookmark.tab));
+            for (let i = 0; i < bookmarkList.length && !modified; i++) {
+                if((bookmarkList[i]).id === newBookmark.id){
+                    modified = true;
+                    bookmarkList[i] = newBookmark;
+                    localStorage.setItem("bookmarks" + newBookmark.tab, JSON.stringify(bookmarkList));
+                }
             }
         }
+    } else{
+        removeBookmarkFromList(oldTabId, newBookmark.id);
+        createBookmark(newBookmark.tab, newBookmark.link, newBookmark.imageSrc, newBookmark.name );
     }
+
     return modified;
 }
 
@@ -392,6 +455,7 @@ function modifyBookmarkFromList(newBookmark){
  * Get bookmark object from internal storage
  * returns null if nothing is found
  * @param id
+ * @param tab
  */
 function fetchBookmark(id, tab){
     var bookmark = null;
@@ -428,6 +492,45 @@ function moveBookmark(bookmark){
  * edit current bookmark
  * @param bookmark
  */
-function editBookmark(bookmark){
-    console.log(bookmark);
+function editBookmark(bookmark){ //the great scuffening
+    var waitNotif = new NotificationDOM("please wait a moment..."); //notification because I want to edit the popup before it's seen, rudimentary really
+    waitNotif.generateDomElement();
+
+    var tab = (bookmark.parentNode).parentNode;
+    tab.appendChild(waitNotif.domElement);
+
+    createBookmarkPopup(tab.id);//create an add bookmark popup
+
+    var popup = document.getElementById("createBookmark" + tab.id); //told you it was scuffed, but this is just beginning
+    var viewer = document.getElementById("viewer" + tab.id);
+
+    $(popup).css("display", "none");
+    $(viewer).css("display", "none");
+    var modifyButton = (popup.getElementsByTagName("button"))[1];
+    var inputs = popup.getElementsByTagName("input");
+
+    modifyButton.innerText = "MODIFY";
+    var link = bookmark.getElementsByTagName("a")[0];
+    var logo = bookmark.getElementsByTagName("img")[0];
+    var name = bookmark.getElementsByClassName("bookmarkName")[0];
+    var tabToAppendTo = popup.getElementsByTagName("select")[0];
+
+    inputs[0].value = link.href
+    inputs[0].dispatchEvent(new Event("input")); //update viewer
+
+    inputs[1].value = logo.src
+    inputs[1].dispatchEvent(new Event("input"));
+
+    inputs[2].value = name.innerText
+    inputs[2].dispatchEvent(new Event("input"));
+
+    modifyButton.onclick = function (){
+        var bookmarkObject = new Bookmark(bookmark.id, inputs[0].value, inputs[1].value, inputs[2].value, tabToAppendTo.value);
+        modifyBookmarkFromList(bookmarkObject, tab.id);
+        refreshBookmarks(tab.id);
+        removeBookmarkPopup(tab, popup);
+    }
+    $(popup).css("display", "block");
+    $(viewer).css("display", "block");
+    waitNotif.deleteDomElement();
 }
