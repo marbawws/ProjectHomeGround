@@ -225,7 +225,10 @@ function generateAddBookmarkBookmark(tab){
     topRightCornerContainer.onmouseleave = function() {purgeTextInDiv(this)};
 
     middleContainer.onclick = function() {createBookmarkPopup( tab)};
-    topRightCornerContainer.onclick = function() {moveBookmark(this)};
+    // topRightCornerContainer.onmousedown = function() {moveBookmark(this)};
+    topRightCornerContainer.addEventListener('mousedown', function (evt){
+        moveBookmark(topRightCornerContainer, evt);
+    });
 
     bookmarkImage.setAttribute("class", "bookmark");
     bookmarkImage.setAttribute("src", "images/plus.svg");
@@ -290,7 +293,10 @@ function displayBookmark(bookmark){
 
     middleContainer.onclick = function() {};
     topLeftCornerContainer.onclick = function() {expandBookmark(this)};
-    topRightCornerContainer.onclick = function() {moveBookmark(this)};
+    // topRightCornerContainer.onmousedown = function() {moveBookmark(this)};
+    topRightCornerContainer.addEventListener('mousedown', function (evt){
+        moveBookmark(topRightCornerContainer, evt);
+    });
     bottomLeftCornerContainer.onclick = function() {editBookmark(this.parentNode);};
     bottomRightCornerContainer.onclick = function() {deleteBookmark(this); };
 
@@ -481,11 +487,14 @@ function expandBookmark(bookmark){
 }
 
 /**
- * Move the bookmark in a different location in its own DIV
- * @param bookmark
+ * Move the bookmark in a different location in the container
+ * @param moveButton
  */
-function moveBookmark(bookmark){
-    console.log(bookmark);
+function moveBookmark(moveButton, evt){
+    var bookmark = moveButton.parentNode;
+    var bookmarksContainer = bookmark.parentNode;
+    bookmarksContainer.style.height = "240px";
+    dragBookmark(62, 10,bookmark,evt);
 }
 
 /**

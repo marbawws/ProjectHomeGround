@@ -11,6 +11,13 @@ html{
 .noPropagation{
 
 }
+div.shadow{
+    float: left; width: 76px; height: 76px;border-radius: 15px; border: 1px solid white;
+    position: relative;
+    margin-left: 2.5px;
+    margin-bottom: 10px;
+    margin-top: 7px;
+}
 div.Notification{
     opacity: 1;
     margin-bottom: 5px;
