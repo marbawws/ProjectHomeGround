@@ -88,8 +88,6 @@ class TimedNotification extends NotificationDOM{
 
         currentWidth = firstPart + "." + secondPart;
         $(progressBar).css("width", currentWidth + "%");
-        console.log(scope.progress);
-        console.log(currentWidth);
         scope.progress = scope.progress - 1 ;
     }
     get methodToCallString(){

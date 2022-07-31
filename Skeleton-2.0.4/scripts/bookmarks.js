@@ -1,3 +1,4 @@
+let bookmarkNameColor = "color:rgb(122,255,122) ";
 function createBookmarkPopup(tab){
     //hide current bookmarks to replace it later
     var currentTab = document.getElementById(tab);
@@ -36,6 +37,12 @@ function createBookmarkViewer(tab) {
 
     var bookmarkElement = displayBookmark(emptyBookmark);
     $(bookmarkElement).css("margin", "0 0 0 calc(50% - 36px) ");
+    var bottomLeftCornerContainer=bookmarkElement.querySelector(".bottomLeftCorner.container");
+    bottomLeftCornerContainer.onclick = function() {
+        var stupidNotification = new NotificationDOM("Yup, you're already doing that.")
+        stupidNotification.generateDomElement();
+        this.parentNode.parentNode.parentNode.prepend(stupidNotification.domElement);
+    };
 
     container.appendChild(bookmarkElement);
     tabElement.appendChild(container);
@@ -227,7 +234,7 @@ function generateAddBookmarkBookmark(tab){
     middleContainer.onclick = function() {createBookmarkPopup( tab)};
     // topRightCornerContainer.onmousedown = function() {moveBookmark(this)};
     topRightCornerContainer.addEventListener('mousedown', function (evt){
-        moveBookmark(topRightCornerContainer, evt);
+        onMoveBookmarkButtonClicked(topRightCornerContainer, evt);
     });
 
     bookmarkImage.setAttribute("class", "bookmark");
@@ -293,9 +300,8 @@ function displayBookmark(bookmark){
 
     middleContainer.onclick = function() {};
     topLeftCornerContainer.onclick = function() {expandBookmark(this)};
-    // topRightCornerContainer.onmousedown = function() {moveBookmark(this)};
     topRightCornerContainer.addEventListener('mousedown', function (evt){
-        moveBookmark(topRightCornerContainer, evt);
+        onMoveBookmarkButtonClicked(topRightCornerContainer, evt);
     });
     bottomLeftCornerContainer.onclick = function() {editBookmark(this.parentNode);};
     bottomRightCornerContainer.onclick = function() {deleteBookmark(this); };
@@ -324,9 +330,18 @@ function displayBookmark(bookmark){
 }
 
 function onAddBookmarkButtonClick(bookmarkPopup){
+    var tabElement = bookmarkPopup.parentElement;
     var inputs = bookmarkPopup.childNodes;
     createBookmark(inputs[4].value, inputs[0].value, inputs[1].value, inputs[2].value);
-    removeBookmarkPopup(bookmarkPopup.parentElement, bookmarkPopup);
+    removeBookmarkPopup(tabElement, bookmarkPopup);
+
+    var notification = new TimedNotification("has successfully been added", 5000);
+    notification.generateDomElement();
+    notification.setInformationBackgroundColor("rgba(0, 0, 200, 0.1)")
+    var information = notification.domElement.querySelector("p"); //I have to change the innerHTML
+    information.innerHTML = "<span style=\""+bookmarkNameColor+"\">" + inputs[2].value  + "</span> " + information.innerHTML;
+    tabElement.prepend(notification.domElement); //tab
+    notification.startTimer();
 }
 
 /**
@@ -407,9 +422,11 @@ function deleteBookmark(bookmarkBottomRightDIV){
     console.log(bookmarkElement);
     $(bookmarkElement).css("display","none");
 
-    var notification = new TimedBookmarkDeletedNotification("Bookmark \""+ bookmarkName +"\" Deleted", 5000, bookmarkElement);
+    var notification = new TimedBookmarkDeletedNotification("has successfully been deleted", 5000, bookmarkElement);
     notification.generateDomElement();
     notification.setInformationBackgroundColor("rgba(200, 0, 0, 0.1)")
+    var information = notification.domElement.querySelector("p"); //I have to change the innerHTML
+    information.innerHTML = "<span style=\""+bookmarkNameColor+"\">" + bookmarkName  + "</span> " + information.innerHTML;
     tab.prepend(notification.domElement); //tab
     notification.startTimer("actuallyDeleteBookmarkThisTimeISwear("+ bookmarkElement.id + ")");
 }
@@ -417,15 +434,17 @@ function deleteBookmark(bookmarkBottomRightDIV){
 function actuallyDeleteBookmarkThisTimeISwear(bookmark){
     removeBookmarkFromList(((bookmark.parentElement).parentElement).id, bookmark.id);
     $(bookmark).remove();
-    console.log(bookmark.id + " deleted")
+    // console.log(bookmark.id + " deleted")
 }
 
 function bookmarkSavedFromDeletion(bookmark){
     var tab = (bookmark.parentElement).parentElement;
     var bookmarkName = bookmark.getElementsByClassName("bookmarkName")[0].innerHTML;
-    var notification = new TimedNotification(bookmarkName + " restored wooo!", 1000 );
+    var notification = new TimedNotification(" has been successfully restored!", 1000 );
     notification.generateDomElement();
     notification.setInformationBackgroundColor("rgba(0, 0, 200, 0.1)")
+    var information = notification.domElement.querySelector("p"); //I have to change the innerHTML
+    information.innerHTML = "<span style=\""+bookmarkNameColor+"\">" + bookmarkName  + "</span> " + information.innerHTML;
     tab.prepend(notification.domElement); //tab
     notification.startTimer("");
 }
@@ -455,6 +474,36 @@ function modifyBookmarkFromList(newBookmark, oldTabId){
     }
 
     return modified;
+}
+
+/**
+ * Moves a bookmark from one index to another in the internal storage (*not visually).
+ * @param bookmarkId
+ * @param index
+ * @param tabId
+ */
+function moveBookmarkToIndex(bookmarkId, index, tabId){
+    if(bookmarkId.includes("forShow")){
+        console.log("just for show");
+    }else {
+        var found = false
+        if (!localStorage.getItem("bookmarks" + tabId)) {
+            console.log("no bookmarks found for " + tabId)
+        } else {
+            var bookmarkList = JSON.parse(localStorage.getItem("bookmarks" + tabId));
+            for (let i = 0; i < bookmarkList.length || !found; i++) {
+                if ((bookmarkList[i]).id === bookmarkId) {
+                    found = true;
+                    if (i !== index) { //same index means it hasn't moved
+                        var bookmarkCopy = {...bookmarkList[i]}; //make a copy of the bookmark
+                        bookmarkList.splice(i, 1); // delete bookmark (we'll re-add it later)
+                        bookmarkList.splice(index, 0, bookmarkCopy);
+                        localStorage.setItem("bookmarks" + tabId, JSON.stringify(bookmarkList));
+                    }
+                }
+            }
+        }
+    }
 }
 
 /**
@@ -490,15 +539,15 @@ function expandBookmark(bookmark){
  * Move the bookmark in a different location in the container
  * @param moveButton
  */
-function moveBookmark(moveButton, evt){
+function onMoveBookmarkButtonClicked(moveButton, evt){
     var bookmark = moveButton.parentNode;
     var bookmarksContainer = bookmark.parentNode;
-    bookmarksContainer.style.height = "240px";
+    // bookmarksContainer.style.height = "240px";
     dragBookmark(62, 10,bookmark,evt);
 }
 
 /**
- * edit current bookmark
+ * edit create a addBookmarkPopup and modify its values to make it modify a bookmark instead
  * @param bookmark
  */
 function editBookmark(bookmark){ //the great scuffening
@@ -538,6 +587,12 @@ function editBookmark(bookmark){ //the great scuffening
         modifyBookmarkFromList(bookmarkObject, tab.id);
         refreshBookmarks(tab.id);
         removeBookmarkPopup(tab, popup);
+        var notification = new TimedNotification("has been successfully modified", 1);
+        notification.generateDomElement();
+        var information = notification.domElement.querySelector("p"); //I have to change the innerHTML
+        information.innerHTML = "<span style=\""+bookmarkNameColor+"\">" + inputs[2].value  + "</span> " + information.innerHTML;
+        tab.prepend(notification.domElement);
+        notification.startTimer();
     }
     $(popup).css("display", "block");
     $(viewer).css("display", "block");

@@ -2,7 +2,7 @@ html{
     width: 100%;
     height: 100%;
     /*background-color: #e50113;*/
-    background-image: url('../images/backgrounds/1650812205426.png');
+    background-image: url('../images/backgrounds/FGcX5FKVEAA-oWq.jpg');
     background-size:contain!important;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -12,12 +12,9 @@ html{
 
 }
 div.shadow{
-    float: left; width: 76px; height: 76px;border-radius: 15px; border: 1px solid white;
-    position: relative;
-    margin-left: 2.5px;
-    margin-bottom: 10px;
-    margin-top: 7px;
+    border: 2px dashed black !important;
 }
+
 div.Notification{
     opacity: 1;
     margin-bottom: 5px;
@@ -29,13 +26,16 @@ div.viewer{
 }
 
 p.Notification{
-    margin:10px 0 5px 0; padding:3px; text-transform: capitalize; font-weight: bold;
+    margin:10px 0 5px 0; padding:3px;font-weight: bold;
     border-radius: 16px;
     text-align: center;
     border: 1px solid white;
     color: white;
     max-width:46ch;
     word-wrap:break-word;
+}
+p.Notification:first-letter{
+    text-transform: capitalize;
 }
 button.Notification{
     margin: 5px 0 10px 0;
@@ -58,6 +58,7 @@ div.bookmarks{
 .bookmarks{
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+    /*user-select: none; */
 }
 div.bookmark{
     float: left; width: 76px; height: 76px;padding: 0px; margin: 0px;border-radius: 15px; border: 1px solid black;
