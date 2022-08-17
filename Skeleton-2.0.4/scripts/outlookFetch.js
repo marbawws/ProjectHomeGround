@@ -4,6 +4,11 @@ let account = {};
 
 var authButton;
 var signOutButton;
+
+let waitOutlook1Notification;
+let waitOutlook2Notification;
+
+
 // initClient();
 function initOClient(username){
     account = {}; //reset the account because class is being reinitialized probably because a new email is being processed
@@ -22,6 +27,17 @@ function initOClient(username){
     // console.log(myMsal.getAllAccounts());
 }
 function figureOutTheAccount(username){
+
+    if(username === PERSONAL_USERNAME){
+        waitOutlook2Notification = new NotificationDOM("Fetching emails...")
+        waitOutlook2Notification.generateDomElement();
+        document.getElementById("outlooks2").appendChild(waitOutlook2Notification.domElement);
+    } else {
+        waitOutlook1Notification = new NotificationDOM("Fetching emails...")
+        waitOutlook1Notification.generateDomElement();
+        document.getElementById("outlooks1").appendChild(waitOutlook1Notification.domElement);
+    }
+
     accounts = myMsal.getAllAccounts();
     console.log(accounts);
         for (let i = 0; i < accounts.length; i++) {
@@ -113,6 +129,11 @@ function appendDivOutlook(subject, from, date, data, username, isRead, id, token
 async function getOutlooks(accessToken, username){ //very similar to getMessages in gmail, but msal is cool so im approaching things a bit differently
     var response = await fetchMessagesOutlook(accessToken);//straight up contains every message, how can gapi compete?
     var messages = response.value;
+    if(username === PERSONAL_USERNAME) {
+        waitOutlook2Notification.dismissed();
+    } else{
+        waitOutlook1Notification.dismissed();
+    }
     for(const message of messages){
         // console.log(message);
         var sender;

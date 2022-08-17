@@ -103,7 +103,9 @@ function autoFillBookmarkForm(link, logo, name){
     }
     try {
         var url = new URL(currentLink);
-        logo.value = "https://icon.horse/icon/" + url.hostname;
+        // https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://tenshi.moe//&size=256
+        // logo.value = "https://icon.horse/icon/" + url.hostname;
+        logo.value = "https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=" + url.origin + "&size=256";
         logo.dispatchEvent(new Event("input"));
 
         var hostname = url.hostname;
@@ -236,6 +238,7 @@ function generateAddBookmarkBookmark(tab){
     topRightCornerContainer.addEventListener('mousedown', function (evt){
         onMoveBookmarkButtonClicked(topRightCornerContainer, evt);
     });
+    topRightCornerContainer.style.cursor = "grab";
 
     bookmarkImage.setAttribute("class", "bookmark");
     bookmarkImage.setAttribute("src", "images/plus.svg");
@@ -299,17 +302,24 @@ function displayBookmark(bookmark){
     bottomRightCornerContainer.onmouseleave = function() {purgeTextInDiv(this); };
 
     middleContainer.onclick = function() {};
-    topLeftCornerContainer.onclick = function() {expandBookmark(this)};
+    topLeftCornerContainer.onclick = function() {onExpandBookmarkButtonClicked(this.parentNode)};
     topRightCornerContainer.addEventListener('mousedown', function (evt){
         onMoveBookmarkButtonClicked(topRightCornerContainer, evt);
     });
+    topRightCornerContainer.style.cursor = "grab";
     bottomLeftCornerContainer.onclick = function() {editBookmark(this.parentNode);};
     bottomRightCornerContainer.onclick = function() {deleteBookmark(this); };
 
-    bookmarkLink.setAttribute("href", bookmark.link);
-    bookmarkImage.setAttribute("class", "bookmark");
-    bookmarkImage.setAttribute("src", bookmark.imageSrc);
-    $(bookmarkImage).css("display", "block");
+    bookmarkLink.href = bookmark.link;
+    bookmarkImage.className = "bookmark";
+    bookmarkImage.src = bookmark.imageSrc;
+    bookmarkImage.onerror = function (){
+        this.src = "images/defaultBookmarkImage.png";
+        this.onerror = function(){
+            this.src = ""; //if defaultBookmarkImage.png is not found, avoids an infinite loop
+        }
+    }
+    bookmarkImage.style.display = "block";
 
     bookmarkName.setAttribute("class", "bookmarkName");
     bookmarkName.onmouseenter=function() {displayTextInDiv(this.innerText, this, "black")};
@@ -531,19 +541,49 @@ function fetchBookmark(id, tab){
  * Embed the website target in an iframe.
  * @param bookmark
  */
-function expandBookmark(bookmark){
-    console.log(bookmark);
+function onExpandBookmarkButtonClicked(bookmark){
+    var bookmarksContainer = bookmark.parentNode;
+    var tabObject = bookmarksContainer.parentNode;
+    var virtualWindow = document.createElement("div");
+    var iframe = document.createElement("iframe");
+    var terminateAction = document.createElement("button");
+    var bookmarkName = bookmark.querySelector("p").innerText;
+    terminateAction.style.float = "left";
+    terminateAction.style.width = "100%";
+    terminateAction.innerHTML = "CLOSE "+bookmarkName;
+    terminateAction.onclick = function (){
+        virtualWindow.remove();
+        bookmarksContainer.style.display = "block";
+    }
+    // $(iframe).attr("is", "x-frame-bypass");
+    iframe.id = bookmark.id + "Iframe";
+    iframe.title = bookmarkName + "'s virtual window";
+    iframe.src = bookmark.querySelector("a").href;
+    iframe.width = "100%";
+    iframe.allowFullscreen = true;
+    iframe.height = "600px";
+    iframe.className = "bookmarkIframe";
+    bookmarksContainer.style.display = "none";
+    virtualWindow.className = "virtualWindow";
+    virtualWindow.appendChild(iframe);
+    virtualWindow.appendChild(terminateAction);
+    tabObject.appendChild(virtualWindow);
+    // console.log(bookmark);
+}
+
+function quitVirtualWindow(){
+
 }
 
 /**
  * Move the bookmark in a different location in the container
  * @param moveButton
+ * @param evt
  */
 function onMoveBookmarkButtonClicked(moveButton, evt){
     var bookmark = moveButton.parentNode;
-    var bookmarksContainer = bookmark.parentNode;
-    // bookmarksContainer.style.height = "240px";
-    dragBookmark(62, 10,bookmark,evt);
+    moveButton.style.cursor = "grabbing";
+    dragBookmark(bookmark,evt);
 }
 
 /**

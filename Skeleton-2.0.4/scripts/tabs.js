@@ -9,7 +9,7 @@ var waitForPage = true;
         // openTab(tabcontent[0],tablinks[0])
         refreshBookmarks("tab1");
     };
-    function openTab(tab, button) {
+    function openTab(tabObject, button) {
 
       var i, tabcontent, tablinks;
       tabcontent = document.getElementsByClassName("tabcontentBookmark");
@@ -20,45 +20,41 @@ var waitForPage = true;
       for (i = 0; i < tablinks.length; i++) {
         tablinks[i].classList.remove("active");
       }
-      tab.style.display = "block";
+      tabObject.style.display = "block";
       button.className += " active";
-      if(tab.classList.contains("fetched")){
+      if(tabObject.classList.contains("fetched")){
         console.log("tab already fetched");
       } else{
-        refreshBookmarks(tab.id);
-        tab.className += " fetched";
+        refreshBookmarks(tabObject.id);
+        tabObject.className += " fetched";
       }
     }
-    function openTabEmail(evt, tabName, type) {
-      var i, tabcontent, tablinks;
-      tabcontent = document.getElementsByClassName("tabcontentEmail");
-      for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
+    function openTabEmail(tabObject, button, type) { //type will be removed at some point
+      var i, tabContent, tabLinks;
+      tabContent = document.getElementsByClassName("tabcontentEmail"); //hide all content tabs
+      for (i = 0; i < tabContent.length; i++) {
+        tabContent[i].style.display = "none";
       }
-      tablinks = document.getElementsByClassName("tablinksEmail");
-      for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      tabLinks = document.getElementsByClassName("tablinksEmail"); // remove "active" classname
+      for (i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].className = tabLinks[i].className.replace(" active", "");
       }
-      document.getElementById(tabName).style.display = "block";
-      evt.currentTarget.className += " active";
-      switch (type) {
-          case 'gmail':
-              if(!gmailFetched){
-                  gmailFetched = true;
-                  handleClientLoad(); //initate client and fetch gmail mails
-              }
-              break;
-          case 'outlookSchool':
-              if(!outlookSchoolFetched){
-                  outlookSchoolFetched = true;
-                  initOClient(SCHOOL_USERNAME); //initate client and fetch outlook school mails
-              }
-              break;
-          case 'outlookPerso':
-              if(!outlookPersonalFetched){
-                  outlookPersonalFetched = true;
-                  initOClient(PERSONAL_USERNAME); //initate client and fetch outlook perso mails
-              }
-              break;
-      }
+      tabObject.style.display = "block"; // show content tab from parameter
+        button.className += " active";
+        if(tabObject.classList.contains("fetched")){
+            console.log("tab already fetched");
+        } else{
+            switch (type) {
+                case 'professional':
+                    handleClientLoad(); //initate client and fetch gmail mails
+                    break;
+                case 'school':
+                    initOClient(SCHOOL_USERNAME); //initate client and fetch outlook school mails
+                    break;
+                case 'personal':
+                    initOClient(PERSONAL_USERNAME); //initate client and fetch outlook perso mails
+                    break;
+            }
+            tabObject.className += " fetched";
+        }
     }

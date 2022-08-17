@@ -7,7 +7,7 @@
  * @param bookmark
  * @param evt
  */
-function dragBookmark(offsetX, offsetY, bookmark, evt) {
+function dragBookmark(bookmark, evt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   dragMouseDown(evt);
   var wait = false;// I don't wanna call elementsFromPoint too often, it must be very resource intensive
@@ -31,8 +31,8 @@ function dragBookmark(offsetX, offsetY, bookmark, evt) {
     // get the mouse cursor position at startup:
     pos3 = e.clientX;
     pos4 = e.clientY;
-    bookmark.style.top = (pos4 - offsetY) + "px";
-    bookmark.style.left = (pos3 - offsetX) + "px";
+    bookmark.style.top = (pos4 - 12) + "px";
+    bookmark.style.left = (pos3 - 62) + "px";
     document.onmouseup = closeDragElement;
     // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
@@ -49,8 +49,8 @@ function dragBookmark(offsetX, offsetY, bookmark, evt) {
       pos3 = e.clientX;
       pos4 = e.clientY;
       // set the element's new position:
-      bookmark.style.top = (pos4 - offsetY) + "px";
-      bookmark.style.left = ( pos3 - offsetX) + "px";
+      bookmark.style.top = (pos4 - 12) + "px";
+      bookmark.style.left = ( pos3 - 62) + "px";
       if(!wait){
         var overlappedElements= document.elementsFromPoint(e.clientX, e.clientY);
         bookmarkToReplace = overlappedElements.find(checkBookmark);
@@ -84,6 +84,7 @@ function dragBookmark(offsetX, offsetY, bookmark, evt) {
       bookmarksContainer.insertBefore( bookmark, shadow);
       shadow.remove();
     }
+    bookmark.querySelector(".topRightCorner.container").style.cursor = "grab";
     // bookmarkToInfiltrate.parentNode.insertBefore( elmnt, bookmarkToInfiltrate);
     document.onmouseup = null;
     document.onmousemove = null;

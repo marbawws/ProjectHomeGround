@@ -11,6 +11,8 @@ var SCOPES = 'https://www.googleapis.com/auth/gmail.readonly https://www.googlea
 var authorizeButton = document.getElementById('authorize_button');
 var signoutButton = document.getElementById('signout_button');
 
+let waitGmailNotification;
+
 /**
  *  On load, called to load the auth2 library and API client library.
  */
@@ -100,6 +102,10 @@ function removeSpecialCharacters(stringToReplace){
  * are found an appropriate message is printed.
  */
 async function getMessages() {
+    waitGmailNotification = new NotificationDOM("Fetching emails...")
+    waitGmailNotification.generateDomElement();
+    document.getElementById("gmails").appendChild(waitGmailNotification.domElement);
+
     var matriceMessages = [];
     response = await fetchMessagesMetadata(10);
     var messages = response.result.messages;
@@ -116,6 +122,7 @@ async function getMessages() {
         i++;
         if (matriceMessages.length === 10) { // async bullshit, callback garbage
             // console.log(matriceMessages);
+            waitGmailNotification.dismissed(); // automatically delete notification right before adding the messages
             matriceMessages = orderMessages(matriceMessages); //ordered by date
             matriceMessages.forEach(message => {
                 displayMessages(message);
