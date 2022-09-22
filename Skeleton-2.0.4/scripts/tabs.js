@@ -1,13 +1,12 @@
-var gmailFetched = false;
-var outlookSchoolFetched = false;
-var outlookPersonalFetched = false;
-var waitForPage = true;
+// var gmailFetched = false;
+// var outlookSchoolFetched = false;
+// var outlookPersonalFetched = false;
+// var waitForPage = true;
 
     window.onload = function() {
-        // var tablinks = document.getElementsByClassName("tablinksBookmark");
-        // var tabcontent = document.getElementsByClassName("tabcontentBookmark");
-        // openTab(tabcontent[0],tablinks[0])
+
         refreshBookmarks("tab1");
+        initiateGcalendar();
     };
     function openTab(tabObject, button) {
 

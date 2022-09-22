@@ -2,16 +2,23 @@ html{
     width: 100%;
     height: 100%;
     /*background-color: #e50113;*/
-    background-image: url('../images/backgrounds/FaP1DlmaIAAa7Zn.jpg');
+    /*background-image: url('../images/backgrounds/FaqgqfpakAA0lkF.jpg');*/
+    background-image: url('../images/backgrounds/Fae7PghaQAAP2YX.jpg');
+    background-image: url('../images/backgrounds/FcTKuq4agAAa936.jpg');
+    /*background-image: url('../images/backgrounds/FaUEaXQVsAARry5.jpg');*/
     /*background-image: url('../images/backgrounds/FaTQvbSVsAAy245.jpg');*/
-    background-size:contain!important;
+    background-size: contain!important;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
-    background-color: rgba(249,247,248,1);
+    /*background-color: rgba(249,247,248,1);*/
+    background-color: rgba(230,230,230,1);
 }
 .noPropagation{
 
+}
+.calendar{
+    padding: 0;overflow:hidden ;margin:0;
 }
 div.shadow{
     border: 2px dashed black !important;
@@ -27,7 +34,7 @@ div.viewer{
     border: 1px solid white;
 }
 div.virtualWindow{
-    width: 430px;
+    /*width: 430px;*/
     /*overflow: hidden;*/
 }
 iframe.bookmarkIframe{
@@ -327,9 +334,9 @@ p.outlook2{
 /*.emails:hover {*/
 /*  background-color:rgba(40, 40, 40, 0.60) !important;*/
 /*}*/
-/*.emails {*/
-/*  overflow: visible;*/
-/*}*/
+.emails {
+    border-radius: 25px;
+}
 .tabcontentEmail {
     display: none;
 }
@@ -345,4 +352,7 @@ p.outlook2{
 .emailContainerheaders {
     background-color: rgba(60, 60, 60, 0.70);
     color:white;
+}
+.tablinksEmail{
+    margin: 5px 0 7px;
 }
