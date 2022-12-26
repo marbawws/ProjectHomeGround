@@ -1,75 +1,61 @@
 html{
     width: 100%;
     height: 100%;
-    /*background-color: #e50113;*/
-    /*background-image: url('../images/backgrounds/FaqgqfpakAA0lkF.jpg');*/
-    background-image: url('../images/backgrounds/Fae7PghaQAAP2YX.jpg');
-    background-image: url('../images/backgrounds/FcTKuq4agAAa936.jpg');
-    /*background-image: url('../images/backgrounds/FaUEaXQVsAARry5.jpg');*/
-    /*background-image: url('../images/backgrounds/FaTQvbSVsAAy245.jpg');*/
-    background-size: contain!important;
+
+    background-image: url('../images/backgrounds/1655905652725.gif');
+
+    background-size: cover!important;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
-    /*background-color: rgba(249,247,248,1);*/
-    background-color: rgba(230,230,230,1);
-}
-.noPropagation{
 
+    background-color: rgba(255,255,255,1);
 }
-.calendar{
-    padding: 0;overflow:hidden ;margin:0;
+
+#myVideo{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+/**
+TABS
+ */
+select.selectTAB{
+    text-align: left;
+    margin : 0 10px;
+    padding : 2px 20px 0px 20px;
+    text-indent: 0px;
+    font-size: 11px;
+    /*align-items: flex-start;*/
+    /*height: 40px;*/
+}
+select.selectTAB:focus:hover{
+    background-color: white;
+}
+select.selectTAB:hover{
+    background-color: transparent;
+}
+.tabcontent {
+    display: none;
+}
+/**
+BOOKMARKS
+ */
+.createBookmarkInputs{
+    border: 1px solid white;
+    padding: 10px 10px 10px 10px;
+    border-radius: 16px;
 }
 div.shadow{
     border: 2px dashed black !important;
 }
 
-div.Notification{
-    opacity: 1;
-    margin-bottom: 5px;
-}
-div.viewer{
-    margin-bottom: 10px;
-    padding: 20px;
-    border: 1px solid white;
-}
-div.virtualWindow{
-    /*width: 430px;*/
-    /*overflow: hidden;*/
-}
-iframe.bookmarkIframe{
-    border-radius: 16px;
-    border: 1px solid white;
-    /*overflow:hidden;*/
-}
+
 .scrollHidden::-webkit-scrollbar{
     display: none;
-}
-
-
-p.Notification{
-    margin:10px 0 5px 0; padding:3px;font-weight: bold;
-    border-radius: 16px;
-    text-align: center;
-    border: 1px solid white;
-    color: white;
-    max-width:46ch;
-    word-wrap:break-word;
-}
-p.Notification:first-letter{
-    text-transform: capitalize;
-}
-button.Notification{
-    margin: 5px 0 10px 0;
-}
-div.progressBarContainer{
-padding: 0; height: 12px; overflow: hidden;
-}
-div.progressBar{
- width: 100%; height: 100%; margin: 0; padding: 0; background-color: rgba(255,255,255,0.7);
-}
-p.progressBar{
- margin: 0; padding: 0; height: 12px; font-size: 11px;text-align: center;font-weight: bold;
 }
 div.bookmarks{
     max-width: 416.7px; margin-bottom: 5px; max-height: 240px; overflow:scroll ;
@@ -97,8 +83,8 @@ div.bookmark.container{
 .bookmarkTextHint{
     text-align: center; position: absolute; top: 50%; left: 50%;
     font-weight: bold; font-size: 11px; user-select: none; transform: translateX(-50%) translateY(-50%); opacity: 1; color: black;
-    width: 60px;
-    /*word-break: break-all;*/
+    width: 11ch !important;
+    overflow-wrap: break-word;
     display: block;
 }
 .bookmarkName{
@@ -107,43 +93,14 @@ div.bookmark.container{
     /*transform: translateX(-50%);*/
     /*height: ;*/
     word-break: break-all;
-    text-overflow: ellipsis;
+    text-overflow: clip;
     white-space: nowrap;
     top: 74px;
     left: 2px;
-    width: 72px;
+    width: 12ch;
     max-height: 20px;
     opacity: 1; color: white;
     overflow: hidden;
-}
-/*img.bookmark:hover{*/
-/*    width: 72px; height: 64px;*/
-/*}*/
-/*div.bookmark:hover{*/
-/*    !*width: 68px; height: 68px; overflow: visible;*!*/
-/*    cursor: pointer;*/
-/*    opacity: 0.2;*/
-/*    !*width: 72px; height: 72px;*!*/
-/*}*/
-/*a.bookmark, a.bookmark:hover,  a.bookmark:focus, a.bookmark:active{*/
-/*    all: unset;*/
-/*    cursor: pointer;*/
-/*    opacity: 0.2;*/
-/*}*/
-select.selectTAB{
-    text-align: left;
-    margin : 0 10px;
-    padding : 2px 20px 0px 20px;
-    text-indent: 0px;
-    font-size: 11px;
-    /*align-items: flex-start;*/
-    /*height: 40px;*/
-}
-select.selectTAB:focus:hover{
-    background-color: white;
-}
-select.selectTAB:hover{
-    background-color: transparent;
 }
 input[type="text"].links{
     display: block;
@@ -257,29 +214,19 @@ input[type="text"].identification{
     background-position: 50% 50%;
     background-color: rgba(255,255,255,0.25);
 }
+div.viewer{
+    margin-bottom: 10px;
+    padding: 20px;
+    border: 1px solid white;
+}
+.forshow {
+    margin: 0 0 0 calc(50% - 36px) !important;
+}
 
-/*.bookmark{*/
-/*    max-width:100%;*/
-/*    max-height:100%;*/
-/*}*/
-/*div.notransparentV:hover{*/
-/*    background-color:rgba(214,218,240, 1)!important;*/
-/*}*/
-/*h1.notransparentV:hover{*/
-/*    opacity: 1 !important;*/
-/*}*/
-/*div.notransparentTwet:hover{*/
-/*    background-color:rgba(255, 255, 255, 1)!important;*/
-/*}*/
-/*img.notransparentTwet:hover{*/
-/*    opacity: 1 !important;*/
-/*}*/
-/*div.notransparentTwitch:hover{*/
-/*    background-color:rgba(255, 255, 255, 1)!important;*/
-/*}*/
-/*img.notransparentTwitch:hover{*/
-/*    opacity: 1 !important;*/
-/*}*/
+/**
+EMAILS
+ */
+
 div.gmail:hover {
     background-color: rgba(60, 60, 60, 1) !important;
     border-radius: 10px
@@ -328,9 +275,6 @@ div.outlook2{
 p.outlook2{
     float: left;color:white;margin: 0; padding: 0;white-space: nowrap;text-overflow: ellipsis;max-width: 47ch; overflow: hidden
 }
-.tabcontent {
-    display: none;
-}
 /*.emails:hover {*/
 /*  background-color:rgba(40, 40, 40, 0.60) !important;*/
 /*}*/
@@ -353,6 +297,43 @@ p.outlook2{
     background-color: rgba(60, 60, 60, 0.70);
     color:white;
 }
-.tablinksEmail{
+.tablinksEmail {
     margin: 5px 0 7px;
+}
+/**
+NOTIFICATION
+ */
+p.Notification{
+    margin:10px 0 5px 0; padding:3px;font-weight: bold;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid white;
+    color: white;
+    max-width:46ch;
+    word-wrap:break-word;
+}
+p.Notification:first-letter{
+    text-transform: capitalize;
+}
+button.Notification{
+    margin: 5px 0 10px 0;
+}
+div.progressBarContainer{
+    padding: 0; height: 12px; overflow: hidden;
+}
+div.progressBar{
+    width: 100%; height: 100%; margin: 0; padding: 0; background-color: rgba(255,255,255,0.7);
+}
+p.progressBar{
+    margin: 0; padding: 0; height: 12px; font-size: 11px;text-align: center;font-weight: bold;
+}
+div.Notification{
+    opacity: 1;
+    margin-bottom: 5px;
+}
+/**
+CALENDAR
+ */
+.calendar{
+    padding: 0;overflow:hidden ;margin:0;
 }
