@@ -15,7 +15,7 @@ function inquireCalendarInformation() { //https://stackoverflow.com/questions/28
         return response.result.event;
     }).then(function(colorsMapping){
         var request = gapi.client.calendar.events.list({
-            'calendarId': 'maladin.rezgui@gmail.com',
+            'calendarId': gmailAddressTEMPORARY,
             "maxResults":"2500"
         });
 
