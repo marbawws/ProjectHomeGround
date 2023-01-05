@@ -1,0 +1,142 @@
+2022-12-26 00:17:48,370 - INFO - /
+2022-12-26 00:17:49,320 - INFO - /scripts/widgets/bookmarks/bookmarks.js
+2022-12-26 00:18:00,116 - INFO - /get-page-title?url=https%3A%2F%2Ftwitter.com%2Fhome&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:18:00,116 - INFO - {'url': ['https://twitter.com/home'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:18:00,116 - INFO - /get-page-title?url=https%3A%2F%2Ftwitter.com%2Fhome&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://twitter.com/home
+2022-12-26 00:18:00,116 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:18:00,342 - ERROR - 'NoneType' object has no attribute 'encode'
+2022-12-26 00:28:32,895 - INFO - /get-page-title?url=https%3A%2F%2Fboards.4channel.org%2Fvg%2Fthread%2F412207247&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:28:32,896 - INFO - {'url': ['https://boards.4channel.org/vg/thread/412207247'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:28:32,896 - INFO - /get-page-title?url=https%3A%2F%2Fboards.4channel.org%2Fvg%2Fthread%2F412207247&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://boards.4channel.org/vg/thread/412207247
+2022-12-26 00:28:32,896 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:28:33,429 - INFO - b'/vg/ - /gig/ - Genshin Impact General - Video Game Generals - 4chan'
+2022-12-26 00:28:40,950 - INFO - /get-page-title?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dw4YwZwHZB1E&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:28:40,950 - INFO - {'url': ['https://www.youtube.com/watch?v=w4YwZwHZB1E'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:28:40,950 - INFO - /get-page-title?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dw4YwZwHZB1E&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://www.youtube.com/watch?v=w4YwZwHZB1E
+2022-12-26 00:28:40,950 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:28:41,437 - INFO - b'\xf0\x9f\x94\xb4LIVE - Nairo - Merry Christmas, Cooking in Mario Party for tonight (Dec 25th) - YouTube'
+2022-12-26 00:28:46,708 - INFO - /get-page-title?url=https%3A%2F%2Ftwitter.com%2FGenshinmem%2Fstatus%2F1606906465511522304%2Fphoto%2F1&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:28:46,708 - INFO - {'url': ['https://twitter.com/Genshinmem/status/1606906465511522304/photo/1'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:28:46,708 - INFO - /get-page-title?url=https%3A%2F%2Ftwitter.com%2FGenshinmem%2Fstatus%2F1606906465511522304%2Fphoto%2F1&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://twitter.com/Genshinmem/status/1606906465511522304/photo/1
+2022-12-26 00:28:46,708 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:28:46,939 - ERROR - 'NoneType' object has no attribute 'encode'
+2022-12-26 00:30:05,772 - INFO - /get-page-title?url=https%3A%2F%2Fwww.airbnb.ca%2Frooms%2F51516531%3Fadults%3D6%26category_tag%3DTag%253A5348%26children%3D0%26infants%3D0%26search_mode%3Dflex_destinations_search%26check_in%3D2022-06-17%26check_out%3D2022-06-19%26federated_search_id%3D10c0e5e6-8eaa-4316-b726-c192ea1cdaca%26source_impression_id%3Dp3_1654728047_x9Y8drXEvEHsuE42&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:30:05,773 - INFO - {'url': ['https://www.airbnb.ca/rooms/51516531?adults=6&category_tag=Tag%3A5348&children=0&infants=0&search_mode=flex_destinations_search&check_in=2022-06-17&check_out=2022-06-19&federated_search_id=10c0e5e6-8eaa-4316-b726-c192ea1cdaca&source_impression_id=p3_1654728047_x9Y8drXEvEHsuE42'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:30:05,773 - INFO - /get-page-title?url=https%3A%2F%2Fwww.airbnb.ca%2Frooms%2F51516531%3Fadults%3D6%26category_tag%3DTag%253A5348%26children%3D0%26infants%3D0%26search_mode%3Dflex_destinations_search%26check_in%3D2022-06-17%26check_out%3D2022-06-19%26federated_search_id%3D10c0e5e6-8eaa-4316-b726-c192ea1cdaca%26source_impression_id%3Dp3_1654728047_x9Y8drXEvEHsuE42&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://www.airbnb.ca/rooms/51516531?adults=6&category_tag=Tag:5348&children=0&infants=0&search_mode=flex_destinations_search&check_in=2022-06-17&check_out=2022-06-19&federated_search_id=10c0e5e6-8eaa-4316-b726-c192ea1cdaca&source_impression_id=p3_1654728047_x9Y8drXEvEHsuE42
+2022-12-26 00:30:05,773 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:30:05,819 - ERROR - HTTP Error 403: Forbidden
+2022-12-26 00:30:27,864 - INFO - /get-page-title?url=https%3A%2F%2Fwww.symbolab.com%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:30:27,865 - INFO - {'url': ['https://www.symbolab.com/'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:30:27,865 - INFO - /get-page-title?url=https%3A%2F%2Fwww.symbolab.com%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://www.symbolab.com/
+2022-12-26 00:30:27,865 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:30:27,996 - INFO - b'Symbolab Math Solver - Step by Step calculator'
+2022-12-26 00:30:36,792 - INFO - /get-page-title?url=https%3A%2F%2Fanimixplay.to%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:30:36,792 - INFO - {'url': ['https://animixplay.to/'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:30:36,792 - INFO - /get-page-title?url=https%3A%2F%2Fanimixplay.to%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://animixplay.to/
+2022-12-26 00:30:36,792 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:30:37,176 - INFO - b'AniMixPlay - Goodbye.'
+2022-12-26 00:30:46,641 - INFO - /get-page-title?url=https%3A%2F%2Fmodrinth.com%2Fmod%2Fno-chat-reports&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:30:46,641 - INFO - {'url': ['https://modrinth.com/mod/no-chat-reports'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:30:46,641 - INFO - /get-page-title?url=https%3A%2F%2Fmodrinth.com%2Fmod%2Fno-chat-reports&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://modrinth.com/mod/no-chat-reports
+2022-12-26 00:30:46,641 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:30:47,430 - INFO - b'No Chat Reports - Minecraft Mod'
+2022-12-26 00:31:11,542 - INFO - /get-page-title?url=https%3A%2F%2Ftwitter.com%2Fado1024imokenp%2Fstatus%2F1607230280368259072&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:31:11,542 - INFO - {'url': ['https://twitter.com/ado1024imokenp/status/1607230280368259072'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:31:11,542 - INFO - /get-page-title?url=https%3A%2F%2Ftwitter.com%2Fado1024imokenp%2Fstatus%2F1607230280368259072&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://twitter.com/ado1024imokenp/status/1607230280368259072
+2022-12-26 00:31:11,542 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:31:11,765 - ERROR - 'NoneType' object has no attribute 'encode'
+2022-12-26 00:33:44,323 - INFO - /get-page-title?url=https%3A%2F%2Ft.c%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:33:44,323 - INFO - {'url': ['https://t.c/'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:33:44,323 - INFO - /get-page-title?url=https%3A%2F%2Ft.c%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://t.c/
+2022-12-26 00:33:44,323 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:33:44,376 - ERROR - <urlopen error [Errno 11001] getaddrinfo failed>
+2022-12-26 00:33:44,542 - INFO - /get-page-title?url=https%3A%2F%2Ft.co%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:33:44,542 - INFO - {'url': ['https://t.co/'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:33:44,542 - INFO - /get-page-title?url=https%3A%2F%2Ft.co%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://t.co/
+2022-12-26 00:33:44,542 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:33:44,674 - INFO - b't.co / Twitter'
+2022-12-26 00:33:50,798 - INFO - /get-page-title?url=https%3A%2F%2Ft.c%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:33:50,799 - INFO - {'url': ['https://t.c/'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:33:50,799 - INFO - /get-page-title?url=https%3A%2F%2Ft.c%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://t.c/
+2022-12-26 00:33:50,799 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:33:50,824 - ERROR - <urlopen error [Errno 11001] getaddrinfo failed>
+2022-12-26 00:33:53,631 - INFO - /get-page-title?url=https%3A%2F%2Ftwitter.c%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:33:53,632 - INFO - {'url': ['https://twitter.c/'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:33:53,632 - INFO - /get-page-title?url=https%3A%2F%2Ftwitter.c%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://twitter.c/
+2022-12-26 00:33:53,632 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:33:53,691 - ERROR - <urlopen error [Errno 11001] getaddrinfo failed>
+2022-12-26 00:33:53,710 - INFO - /get-page-title?url=https%3A%2F%2Ftwitter.co%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:33:53,710 - INFO - {'url': ['https://twitter.co/'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:33:53,711 - INFO - /get-page-title?url=https%3A%2F%2Ftwitter.co%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://twitter.co/
+2022-12-26 00:33:53,711 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:34:03,782 - ERROR - <urlopen error timed out>
+2022-12-26 00:34:03,783 - INFO - /get-page-title?url=https%3A%2F%2Ftwitter.com%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:34:03,783 - INFO - {'url': ['https://twitter.com/'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:34:03,783 - INFO - /get-page-title?url=https%3A%2F%2Ftwitter.com%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://twitter.com/
+2022-12-26 00:34:03,784 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:34:04,024 - ERROR - 'NoneType' object has no attribute 'encode'
+2022-12-26 00:34:44,754 - INFO - /get-page-title?url=https%3A%2F%2Fboards.4channel.org%2Fvg%2Fthread%2F412207247&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:34:44,754 - INFO - {'url': ['https://boards.4channel.org/vg/thread/412207247'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:34:44,754 - INFO - /get-page-title?url=https%3A%2F%2Fboards.4channel.org%2Fvg%2Fthread%2F412207247&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://boards.4channel.org/vg/thread/412207247
+2022-12-26 00:34:44,754 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:34:45,403 - INFO - b'/vg/ - /gig/ - Genshin Impact General - Video Game Generals - 4chan'
+2022-12-26 00:34:52,717 - INFO - /get-page-title?url=https%3A%2F%2F4chan.org%2Fv&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:34:52,717 - INFO - {'url': ['https://4chan.org/v'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:34:52,717 - INFO - /get-page-title?url=https%3A%2F%2F4chan.org%2Fv&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://4chan.org/v
+2022-12-26 00:34:52,717 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:34:53,102 - INFO - b'/v/ - Video Games - 4chan'
+2022-12-26 00:34:57,414 - INFO - /get-page-title?url=https%3A%2F%2Fmessenger.com%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:34:57,414 - INFO - {'url': ['https://messenger.com/'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:34:57,414 - INFO - /get-page-title?url=https%3A%2F%2Fmessenger.com%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://messenger.com/
+2022-12-26 00:34:57,415 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:34:57,713 - INFO - b'Messenger'
+2022-12-26 00:35:02,152 - INFO - /get-page-title?url=https%3A%2F%2Ftwitch.tv%2Fdirectory&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:35:02,153 - INFO - {'url': ['https://twitch.tv/directory'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:35:02,153 - INFO - /get-page-title?url=https%3A%2F%2Ftwitch.tv%2Fdirectory&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://twitch.tv/directory
+2022-12-26 00:35:02,153 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:35:02,235 - INFO - b'Twitch'
+2022-12-26 00:35:09,940 - INFO - /get-page-title?url=https%3A%2F%2Ftwitter.com%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:35:09,940 - INFO - {'url': ['https://twitter.com/'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:35:09,940 - INFO - /get-page-title?url=https%3A%2F%2Ftwitter.com%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://twitter.com/
+2022-12-26 00:35:09,940 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:35:10,173 - ERROR - 'NoneType' object has no attribute 'encode'
+2022-12-26 00:35:13,590 - INFO - /get-page-title?url=https%3A%2F%2Fmusic.youtube.com%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:35:13,590 - INFO - {'url': ['https://music.youtube.com/'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:35:13,590 - INFO - /get-page-title?url=https%3A%2F%2Fmusic.youtube.com%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://music.youtube.com/
+2022-12-26 00:35:13,590 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:35:14,262 - INFO - b'YouTube Music'
+2022-12-26 00:35:16,535 - INFO - /get-page-title?url=https%3A%2F%2Fstlaval.ca%2Fplanificateur%2Fsearch%2Fline%2Froute%2F65S%2Fstop%2F46462%2Foption_time%2Fnow&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:35:16,535 - INFO - {'url': ['https://stlaval.ca/planificateur/search/line/route/65S/stop/46462/option_time/now'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:35:16,535 - INFO - /get-page-title?url=https%3A%2F%2Fstlaval.ca%2Fplanificateur%2Fsearch%2Fline%2Froute%2F65S%2Fstop%2F46462%2Foption_time%2Fnow&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://stlaval.ca/planificateur/search/line/route/65S/stop/46462/option_time/now
+2022-12-26 00:35:16,536 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:35:16,564 - ERROR - HTTP Error 503: Service Unavailable
+2022-12-26 00:35:41,502 - INFO - /get-page-title?url=https%3A%2F%2Ftecnic.ca%2Ffr%2Fespace-client%2Fmon-dossier&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:35:41,502 - INFO - {'url': ['https://tecnic.ca/fr/espace-client/mon-dossier'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:35:41,502 - INFO - /get-page-title?url=https%3A%2F%2Ftecnic.ca%2Ffr%2Fespace-client%2Fmon-dossier&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://tecnic.ca/fr/espace-client/mon-dossier
+2022-12-26 00:35:41,502 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:35:42,065 - INFO - b'\xc3\x89cole de conduite Tecnic - Ouvrir une session en ligne'
+2022-12-26 00:35:45,914 - INFO - /get-page-title?url=https%3A%2F%2Ffmovies.to%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:35:45,914 - INFO - {'url': ['https://fmovies.to/'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:35:45,914 - INFO - /get-page-title?url=https%3A%2F%2Ffmovies.to%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://fmovies.to/
+2022-12-26 00:35:45,914 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:35:46,135 - INFO - b'FMovies | Watch Movies Online Free on FMovies.to'
+2022-12-26 00:35:48,619 - INFO - /get-page-title?url=https%3A%2F%2Fguidetojapanese.org%2Flearn%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:35:48,620 - INFO - {'url': ['https://guidetojapanese.org/learn/'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:35:48,620 - INFO - /get-page-title?url=https%3A%2F%2Fguidetojapanese.org%2Flearn%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://guidetojapanese.org/learn/
+2022-12-26 00:35:48,620 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:35:49,066 - INFO - b"Learn Japanese \xe2\x80\x93 Tae Kim's Guide to Learning Japanese"
+2022-12-26 00:35:51,073 - INFO - /get-page-title?url=https%3A%2F%2Fcubari.moe%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:35:51,073 - INFO - {'url': ['https://cubari.moe/'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:35:51,073 - INFO - /get-page-title?url=https%3A%2F%2Fcubari.moe%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://cubari.moe/
+2022-12-26 00:35:51,073 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:35:51,150 - INFO - b'Cubari'
+2022-12-26 00:35:54,399 - INFO - /get-page-title?url=https%3A%2F%2Fcampus.concordia.ca%2Fpsc%2Fpscsprd%2FEMPLOYEE%2FSA%2Fc%2FSA_LEARNER_SERVICES.SSS_STUDENT_CENTER.GBL%3FPage%3DSSS_STUDENT_CENTER%26Action%3DU%26TargetFrameName%3DNone&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:35:54,399 - INFO - {'url': ['https://campus.concordia.ca/psc/pscsprd/EMPLOYEE/SA/c/SA_LEARNER_SERVICES.SSS_STUDENT_CENTER.GBL?Page=SSS_STUDENT_CENTER&Action=U&TargetFrameName=None'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:35:54,399 - INFO - /get-page-title?url=https%3A%2F%2Fcampus.concordia.ca%2Fpsc%2Fpscsprd%2FEMPLOYEE%2FSA%2Fc%2FSA_LEARNER_SERVICES.SSS_STUDENT_CENTER.GBL%3FPage%3DSSS_STUDENT_CENTER%26Action%3DU%26TargetFrameName%3DNone&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://campus.concordia.ca/psc/pscsprd/EMPLOYEE/SA/c/SA_LEARNER_SERVICES.SSS_STUDENT_CENTER.GBL?Page=SSS_STUDENT_CENTER&Action=U&TargetFrameName=None
+2022-12-26 00:35:54,399 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:35:54,422 - ERROR - <urlopen error [Errno 2] No such file or directory>
+2022-12-26 00:36:06,609 - INFO - /get-page-title?url=https%3A%2F%2Ftwitter.com%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0
+2022-12-26 00:36:06,609 - INFO - {'url': ['https://twitter.com/'], 'userAgent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0']}
+2022-12-26 00:36:06,609 - INFO - /get-page-title?url=https%3A%2F%2Ftwitter.com%2F&userAgent=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A108.0)%20Gecko%2F20100101%20Firefox%2F108.0 entered the page title search with url : https://twitter.com/
+2022-12-26 00:36:06,609 - INFO - User agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:108.0) Gecko/20100101 Firefox/108.0 was used
+2022-12-26 00:36:06,846 - ERROR - 'NoneType' object has no attribute 'encode'
