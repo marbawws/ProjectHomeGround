@@ -1,3 +1,4 @@
 /scripts/widgets/mail/gmailConfig.js
 /scripts/widgets/mail/outlookConfig.js
 /images/backgrounds/*
+/node/node_modules/*
