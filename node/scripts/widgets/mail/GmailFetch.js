@@ -10,6 +10,12 @@ var SCOPES = 'https://www.googleapis.com/auth/gmail.readonly https://www.googlea
 
 var authorizeButton = document.getElementById('authorize_button');
 var signoutButton = document.getElementById('signout_button');
+authorizeButton.onclick = handleAuthClick;
+signoutButton.onclick = handleSignoutClick;
+
+let tokenClient;
+let gapiInited = false;
+let gisInited = false;
 
 let waitGmailNotification;
 
@@ -17,7 +23,8 @@ let waitGmailNotification;
  *  On load, called to load the auth2 library and API client library.
  */
 function handleClientLoad() {
-    gapi.load('client:auth2', initGClient);
+    gapi.load('client', initGClient);
+    gisLoaded();
 }
 
 /**
@@ -27,53 +34,68 @@ function handleClientLoad() {
 async function initGClient() {
     await gapi.client.init({
         apiKey: GAPI_KEY,
-        clientId: GCLIENT_ID,
         discoveryDocs: DISCOVERY_DOCS,
-        scope: SCOPES,
-        prompt: 'consent'
     })
-        .then(function () {
-            inquireCalendarInformation();
-            // Listen for sign-in state changes.
-            gapi.auth2.getAuthInstance().isSignedIn.listen(updateGSigninStatus);
-
-            // Handle the initial sign-in state.
-            updateGSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-            authorizeButton.onclick = handleAuthClick;
-            signoutButton.onclick = handleSignoutClick;
-        }, function (error) {
-            console.log(error);
-        });
+    gapiInited = true;
+    maybeEnableButtons(); //new gapi got even worse
 }
 
-/**
- *  Called when the signed in status changes, to update the UI
- *  appropriately. After a sign-in, the API is called.
- */
-function updateGSigninStatus(isSignedIn) {
-    if (isSignedIn) {
-        authorizeButton.style.display = 'none';
-        signoutButton.style.display = 'block';
-        getMessages();
-    } else {
+function gisLoaded() {
+    tokenClient = google.accounts.oauth2.initTokenClient({
+        client_id: GCLIENT_ID,
+        scope: SCOPES,
+        prompt: '',
+        callback: async (response) => {
+            if (response.error !== undefined) {
+                throw (response);
+            }
+            document.cookie = "access_tokenME=" + response.access_token;
+            console.log(response);
+            authorizeButton.style.display = 'none';
+            signoutButton.style.display = 'block';
+            await getMessages();
+            // console.log(tokenClient);
+        },
+    });
+    gisInited = true;
+    // gapi.client.setToken();
+}
+
+function maybeEnableButtons() {
+    if (gapiInited && gisInited) {
+        handleAuthClick(); // ;)
         authorizeButton.style.display = 'block';
         signoutButton.style.display = 'none';
     }
 }
 
+
 /**
  *  Sign in the user upon button click.
  */
 function handleAuthClick(event) {
-    gapi.auth2.getAuthInstance().signIn();
+    if (gapi.client.getToken() === null) {
+        // Prompt the user to select a Google Account and ask for consent to share their data
+        // when establishing a new session.
+        tokenClient.requestAccessToken({prompt: ''});
+    } else {
+        // Skip display of account chooser and consent dialog for an existing session.
+        tokenClient.requestAccessToken({prompt: ''});
+    }
 }
 
 /**
  *  Sign out the user upon button click.
  */
 function handleSignoutClick(event) {
-    gapi.auth2.getAuthInstance().signOut();
-    eraseDivs("gmail");//secure sign out :)
+    // gapi.auth2.getAuthInstance().signOut();
+    const token = gapi.client.getToken();
+    if (token !== null) {
+        google.accounts.oauth2.revoke(token.access_token);
+        //gapi.client.setToken('');
+        authorizeButton.style.display = 'block';
+        signoutButton.style.display = 'none';
+    }
 }
 
 /**
@@ -154,7 +176,6 @@ function getHtmlEncodedContent(payload) { //content of messages are encrypted an
                     break;
                 case "multipart/alternative": //this shit is absurd, strap in, onlooker
                     return getHtmlEncodedContent(payload.parts[i]);
-
                 case "multipart/related": //I found.. yet.. another
                     return getHtmlEncodedContent(payload.parts[i]);
             }
