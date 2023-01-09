@@ -1,6 +1,7 @@
 /**
  * this is kindof like the main page, it initializes all tabs
  */
+
 window.onload = function() {
 
         refreshBookmarks("tab1");

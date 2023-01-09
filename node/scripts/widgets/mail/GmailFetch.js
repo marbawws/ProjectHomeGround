@@ -35,7 +35,7 @@ async function initGClient() {
     await gapi.client.init({
         apiKey: GAPI_KEY,
         discoveryDocs: DISCOVERY_DOCS,
-    })
+    });
     gapiInited = true;
     maybeEnableButtons(); //new gapi got even worse
 }
@@ -49,6 +49,7 @@ function gisLoaded() {
             if (response.error !== undefined) {
                 throw (response);
             }
+            inquireCalendarInformation();
             document.cookie = "access_tokenME=" + response.access_token;
             console.log(response);
             authorizeButton.style.display = 'none';
