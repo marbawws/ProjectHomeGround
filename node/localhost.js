@@ -2,15 +2,20 @@ const path = require('path');
 const express = require('express');
 const url = require('url');
 const request = require('request');
+const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
+var favicon = require('serve-favicon')
 
 const hostname = '127.0.0.1';
 const port = 8000;
 const app = express();
 const router = express.Router();
-app.use('/scripts', express.static(path.join(__dirname + 'scripts')));
-app.use('/images', express.static(path.join(__dirname +'images')));
-app.use('/css', express.static(path.join(__dirname +'css')));
+app.use(favicon(path.join(__dirname, 'public' ,'/favicon.gif')))
+console.log(path.join(__dirname, 'public', 'favicon.ico'));
+app.use('/scripts', express.static(path.join(__dirname + '/scripts')));
+app.use('/images', express.static(path.join(__dirname +'/images')));
+app.use('/css', express.static(path.join(__dirname +'/css')));
+app.use('/public', express.static(path.join(__dirname + '/public')));
 
 // Setup essential routes
 router.get('/', function(req, res) {
@@ -46,6 +51,9 @@ router.get('/get-page-title',function(req, res) {
   console.log(pageURL + "   " + userAgent);
 });
 
+// router.get('/favicon.ico', function(req,res){
+//   res.sendFile();
+// })
 // 'D:\\bureau\\wallpaper\\ProjectHomeGround\\Skeleton-2.0.4\\index.html\\'
 //add the router
 app.use('/', router);

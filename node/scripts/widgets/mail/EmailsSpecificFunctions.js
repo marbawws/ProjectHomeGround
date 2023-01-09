@@ -1,4 +1,3 @@
-// var index = 0;
 async function generateEmailWindow(from, subject, date, data, messageId, accessToken, read){
     var win = window.open("", "test", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=800,height=800,screenX=600, top=110");
     var content = decodeContent(data);
